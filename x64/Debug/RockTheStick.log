@@ -1,3 +1,4 @@
-﻿  main.cpp
-C:\Users\Angel\source\repos\Rockthestick\main.cpp(41,39): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-  RockTheStick.vcxproj -> C:\Users\Angel\source\repos\Rockthestick\x64\Debug\RockTheStick.exe
+﻿SDL2Main.lib(SDL_windows_main.obj) : error LNK2019: unresolved external symbol SDL_main referenced in function main_getcmdline
+    Hint on symbols that are defined and could potentially match:
+      "int __cdecl SDL_main(void)" (?SDL_main@@YAHXZ)
+C:\Users\Angel\source\repos\RockTheStick\x64\Debug\RockTheStick.exe : fatal error LNK1120: 1 unresolved externals
