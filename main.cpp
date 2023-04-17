@@ -1,7 +1,7 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <SDL2/SDL.h>
+//#include <SDL2/SDL.h>
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 
@@ -51,25 +51,25 @@ int main()
 	glfwSwapBuffers(window);
 
 
-	//int widthImg, heightImg, numColch;
-	//unsigned char* bytes = stbi_load("bg.jpg", &widthImg, &heightImg, &numColch, 0);
+	int widthImg, heightImg, numColch;
+	unsigned char* bytes = stbi_load("bg.jpg", &widthImg, &heightImg, &numColch, 0);
 
-	//GLuint texture;
-	//glGenTextures(1, &texture);
-	//glActiveTexture(GL_TEXTURE0);
-	//glBindTexture(GL_TEXTURE_2D, texture);
+	GLuint texture;
+	glGenTextures(1, &texture);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture);
 
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
 
-	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, widthImg, heightImg, 0, GL_RGBA, GL_UNSIGNED_BYTE, bytes);
-	//glGenerateMipmap(GL_TEXTURE_2D); 
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, widthImg, heightImg, 0, GL_RGBA, GL_UNSIGNED_BYTE, bytes);
+	glGenerateMipmap(GL_TEXTURE_2D); 
 
-	//stbi_image_free(bytes);
-	//glBindTexture(GL_TEXTURE_2D, 0);
+	stbi_image_free(bytes);
+	glBindTexture(GL_TEXTURE_2D, 0);
 
 	//While events are going on in window, show the window
 	while (!glfwWindowShouldClose(window))
@@ -82,4 +82,3 @@ int main()
 	glfwTerminate();
 	return 0;
 }
-
