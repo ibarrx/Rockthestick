@@ -1,3 +1,1 @@
-﻿  main.cpp
-C:\Users\Angel\source\repos\RockTheStick\main.cpp(49,39): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-  RockTheStick.vcxproj -> C:\Users\Angel\source\repos\RockTheStick\x64\Debug\RockTheStick.exe
+﻿  RockTheStick.vcxproj -> C:\Users\Angel\source\repos\RockTheStick\x64\Debug\RockTheStick.exe
