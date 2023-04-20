@@ -45,12 +45,17 @@ namespace Menu
 
         private void btnStartGame_Click(object sender, EventArgs e)
         {
-            // Specify the path of the compiled main.exe file
-            string exePath = @"C:\Users\Angel\source\repos\Rockthestick\main.exe";
+            // Start the compiled C++ executable
+            Process process = new Process();
+            process.StartInfo.FileName = "C:\\Users\\Angel\\source\\repos\\Rockthestick\\x64\\Debug\\RockTheStick.exe"; // Replace with the path to your compiled C++ executable
+            process.Start();
 
-            // Open the compiled .exe file with the default associated program
-            Process.Start(exePath);
-            this.Close();
+            // Optionally, you can wait for the process to exit before continuing
+            process.WaitForExit();
+
+            // You can also close the process when you're done with it
+            process.Close();
+
         }
     }
 }
