@@ -46,7 +46,7 @@ namespace Menu
         private void btnStartGame_Click(object sender, EventArgs e)
         {
             // Specify the path of the compiled main.exe file
-            string exePath = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
+            string exePath = @"C:\Users\Angel\source\repos\Rockthestick\main.exe";
 
             // Open the compiled .exe file with the default associated program
             Process.Start(exePath);
