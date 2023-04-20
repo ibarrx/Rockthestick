@@ -8,23 +8,23 @@
     "net6.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Angel\\.nuget\\packages\\": {},
+    "C:\\Users\\Coco\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Angel\\source\\repos\\Rockthestick\\Menu\\Menu.csproj",
+      "projectUniqueName": "C:\\Users\\Coco\\Source\\Repos\\Rockthestick\\Menu\\Menu.csproj",
       "projectName": "Menu",
-      "projectPath": "C:\\Users\\Angel\\source\\repos\\Rockthestick\\Menu\\Menu.csproj",
-      "packagesPath": "C:\\Users\\Angel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Angel\\source\\repos\\Rockthestick\\Menu\\obj\\",
+      "projectPath": "C:\\Users\\Coco\\Source\\Repos\\Rockthestick\\Menu\\Menu.csproj",
+      "packagesPath": "C:\\Users\\Coco\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Coco\\Source\\Repos\\Rockthestick\\Menu\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Angel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Coco\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -33,6 +33,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -69,7 +70,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

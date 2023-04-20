@@ -1,1 +1,2 @@
 C:\Users\Angel\source\repos\Rockthestick\x64\Debug\RockTheStick.exe
+C:\Users\Coco\source\repos\Rockthestick\x64\Debug\RockTheStick.exe
