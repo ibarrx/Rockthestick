@@ -1,7 +1,6 @@
 ﻿  main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22000.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
 C:\Users\Angel\source\repos\Rockthestick\Libraries\include\glad\glad.h(32,1): message : see previous definition of 'APIENTRY'
-D:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\filesystem(13): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
-C:\Users\Angel\source\repos\RockTheStick\main.cpp(89,39): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\Angel\source\repos\RockTheStick\main.cpp(123,40): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\Angel\source\repos\RockTheStick\main.cpp(70,39): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\Angel\source\repos\RockTheStick\main.cpp(109,40): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
   RockTheStick.vcxproj -> C:\Users\Angel\source\repos\RockTheStick\x64\Debug\RockTheStick.exe

@@ -2,7 +2,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <windows.h>
-#include <SFML/Audio.hpp>
+#include <atlbase.h>
+#include <wmp.h>
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 
@@ -10,47 +11,36 @@
 #pragma comment(lib, "winmm.lib")
 
 // Vertices coordinates
-GLfloat vertices[] =
-{ //     COORDINATES     /        COLORS      /   TexCoord  //
-	-0.5f, -0.5f, 0.0f,     1.0f, 0.0f, 0.0f,	0.0f, 0.0f, // Lower left corner
-	-0.5f,  0.5f, 0.0f,     0.0f, 1.0f, 0.0f,	0.0f, 1.0f, // Upper left corner
-	 0.5f,  0.5f, 0.0f,     0.0f, 0.0f, 1.0f,	1.0f, 1.0f, // Upper right corner
-	 0.5f, -0.5f, 0.0f,     1.0f, 1.0f, 1.0f,	1.0f, 0.0f  // Lower right corner
-};
-
-GLuint indices[] =
-{
-	0, 2, 1, // Upper triangle
-	0, 3, 2 // Lower triangle
-};
+//GLfloat vertices[] =
+//{ //     COORDINATES     /        COLORS      /   TexCoord  //
+//	-0.5f, -0.5f, 0.0f,     1.0f, 0.0f, 0.0f,	0.0f, 0.0f, // Lower left corner
+//	-0.5f,  0.5f, 0.0f,     0.0f, 1.0f, 0.0f,	0.0f, 1.0f, // Upper left corner
+//	 0.5f,  0.5f, 0.0f,     0.0f, 0.0f, 1.0f,	1.0f, 1.0f, // Upper right corner
+//	 0.5f, -0.5f, 0.0f,     1.0f, 1.0f, 1.0f,	1.0f, 0.0f  // Lower right corner
+//};
+//
+//GLuint indices[] =
+//{
+//	0, 2, 1, // Upper triangle
+//	0, 3, 2 // Lower triangle
+//};
 
 Movement character;
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods){
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) 
+{
 	character.key_cb(window, key, action);
 }
 
-void PlaySound()
+void soundPlay()
 {
-
-	sf::Music music;
-	music.openFromFile("C:/Users/Angel/source/repos/RockTheStick/fullBattleTheme.wav");
-		
-	music.play();
+	bool played = PlaySound(_T("sounds/fullBattleTheme.wav"), NULL, SND_LOOP | SND_ASYNC);
+	std::cout << played << std::endl;
 }
 
 
 int main()
 {
-	char buffer[MAX_PATH];
-	DWORD len = GetCurrentDirectoryA(MAX_PATH, buffer);
-	if (len == 0) {
-		std::cerr << "Failed to get current directory" << std::endl;
-		return 1;
-	}
-
-	std::cout << "Current Directory: " << buffer << std::endl;
-	//GLFW initialize
 	glfwInit();
 
 	//glfw Version set
@@ -59,7 +49,7 @@ int main()
 	//using Core Profile
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	//Create a window
-	GLFWwindow* window = glfwCreateWindow(800, 800, "RockTheStick", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(816, 489, "RockTheStick", NULL, NULL);
 	//Window error check
 	if (window == NULL)
 	{
@@ -67,11 +57,12 @@ int main()
 		glfwTerminate();
 		return -1;
 	}
-	glfwMakeContextCurrent(window);
 
+	glfwMakeContextCurrent(window);
+	glViewport(0, 0, 816, 489);
 	gladLoadGL();
 
-	glViewport(0, 0, 800, 800);
+
 
 	glClearColor(0.07f, 0.13f, 0.17, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -99,19 +90,21 @@ int main()
 	//glBindTexture(GL_TEXTURE_2D, 0);
 
 	//While events are going on in window, show the window
-	
+
 	glfwSetKeyCallback(window, key_callback);
+
+	soundPlay();
 
 	while (!glfwWindowShouldClose(window))
 	{
-		PlaySound();
+
 		float delta = 0.01f;
 		character.update(delta);
 		glClearColor(0.07f, 0.13f, 0.17, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
-		
+
 	}
 
 	/*glDeleteTextures(1, &texture);*/

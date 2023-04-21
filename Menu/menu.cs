@@ -10,7 +10,7 @@ namespace Menu
         public menu()
         {
             InitializeComponent();
-            soundPlayer = new SoundPlayer("MenuLoopable.wav"); // Initialize in the constructor
+            soundPlayer = new SoundPlayer("sounds/MenuLoopable.wav"); // Initialize in the constructor
         }
 
         private void playMenuMusic()
@@ -50,27 +50,28 @@ namespace Menu
 
             // Start the compiled C++ executable
             Process process = new Process();
-            process.StartInfo.FileName = "C:\\Users\\Angel\\source\\repos\\Rockthestick\\x64\\Debug\\RockTheStick.exe"; // Replace with the path to your compiled C++ executable
+            process.StartInfo.FileName = "C:\\Users\\Angel\\source\\repos\\Rockthestick\\x64\\Debug\\RockTheStick.exe";
             process.Start();
             this.WindowState = FormWindowState.Minimized;
 
             // Optionally, you can wait for the process to exit before continuing
-            process.WaitForExit();
-            if(process.HasExited)
-            {
-                this.WindowState = originalWindowState;
-                this.BringToFront();
-                this.Activate();
 
-                if(checkAudio.Checked)
+                process.WaitForExit();
+                if (process.HasExited)
                 {
-                    soundPlayer.Play();
+                    this.WindowState = originalWindowState;
+                    this.BringToFront();
+                    this.Activate();
+
+                    if (checkAudio.Checked)
+                    {
+                        soundPlayer.Play();
+                    }
+                    // You can also close the process when you're done with it
+                    process.Close();
                 }
-            }
-
-            // You can also close the process when you're done with it
-            process.Close();
-
         }
+
+
     }
 }
