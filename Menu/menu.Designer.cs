@@ -33,17 +33,17 @@
             this.btnSettings = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.checkAudio = new System.Windows.Forms.CheckBox();
+            this.picLogo = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // btnStartGame
             // 
             this.btnStartGame.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStartGame.BackColor = System.Drawing.Color.White;
-            this.btnStartGame.BackgroundImage = global::Menu.Properties.Resources.MenuBtn;
+            this.btnStartGame.BackColor = System.Drawing.Color.DimGray;
             this.btnStartGame.Font = new System.Drawing.Font("NiseSegaSonic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnStartGame.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnStartGame.Image = global::Menu.Properties.Resources.MenuBtn;
+            this.btnStartGame.ForeColor = System.Drawing.SystemColors.Control;
             this.btnStartGame.Location = new System.Drawing.Point(251, 251);
             this.btnStartGame.Name = "btnStartGame";
             this.btnStartGame.Size = new System.Drawing.Size(296, 48);
@@ -85,6 +85,21 @@
             this.checkAudio.UseVisualStyleBackColor = false;
             this.checkAudio.CheckedChanged += new System.EventHandler(this.checkAudio_CheckedChanged);
             // 
+            // picLogo
+            // 
+            this.picLogo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.picLogo.BackColor = System.Drawing.Color.Transparent;
+            this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
+            this.picLogo.InitialImage = null;
+            this.picLogo.Location = new System.Drawing.Point(79, -43);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(639, 391);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picLogo.TabIndex = 4;
+            this.picLogo.TabStop = false;
+            // 
             // menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -92,14 +107,16 @@
             this.BackgroundImage = global::Menu.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.checkAudio);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.btnStartGame);
+            this.Controls.Add(this.picLogo);
+            this.Controls.Add(this.checkAudio);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "menu";
             this.Text = "RockTheStick";
             this.Load += new System.EventHandler(this.menu_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -111,5 +128,6 @@
         private Button btnSettings;
         private OpenFileDialog openFileDialog1;
         private CheckBox checkAudio;
+        private PictureBox picLogo;
     }
 }

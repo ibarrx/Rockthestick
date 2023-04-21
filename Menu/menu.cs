@@ -45,6 +45,8 @@ namespace Menu
 
         private void btnStartGame_Click(object sender, EventArgs e)
         {
+
+            soundPlayer.Stop();
             // Start the compiled C++ executable
             Process process = new Process();
             process.StartInfo.FileName = "C:\\Users\\Angel\\source\\repos\\Rockthestick\\x64\\Debug\\RockTheStick.exe"; // Replace with the path to your compiled C++ executable
