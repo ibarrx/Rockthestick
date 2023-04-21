@@ -2,10 +2,12 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <windows.h>
+#include <SFML/Audio.hpp>
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 
 #include "Movement.h"
+#pragma comment(lib, "winmm.lib")
 
 // Vertices coordinates
 GLfloat vertices[] =
@@ -28,8 +30,26 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	character.key_cb(window, key, action);
 }
 
+void PlaySound()
+{
+
+	sf::Music music;
+	music.openFromFile("C:/Users/Angel/source/repos/RockTheStick/fullBattleTheme.wav");
+		
+	music.play();
+}
+
+
 int main()
 {
+	char buffer[MAX_PATH];
+	DWORD len = GetCurrentDirectoryA(MAX_PATH, buffer);
+	if (len == 0) {
+		std::cerr << "Failed to get current directory" << std::endl;
+		return 1;
+	}
+
+	std::cout << "Current Directory: " << buffer << std::endl;
 	//GLFW initialize
 	glfwInit();
 
@@ -84,12 +104,14 @@ int main()
 
 	while (!glfwWindowShouldClose(window))
 	{
+		PlaySound();
 		float delta = 0.01f;
 		character.update(delta);
 		glClearColor(0.07f, 0.13f, 0.17, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+		
 	}
 
 	/*glDeleteTextures(1, &texture);*/
