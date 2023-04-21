@@ -116,6 +116,10 @@
       <AdditionalDependencies>glfw3.lib;opengl32.lib;SDL2Main.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\Coco\source\repos\Rockthestick\Libraries\lib;C:\Users\Coco\source\repos\Rockthestick\Libraries\include;C:\Users\Angel\source\repos\Rockthestick\Libraries\include;C:\Users\Angel\source\repos\Rockthestick\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
