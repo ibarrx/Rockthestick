@@ -39,7 +39,7 @@ void soundPlay()
 }
 
 
-int main()
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	glfwInit();
 
@@ -57,10 +57,26 @@ int main()
 		glfwTerminate();
 		return -1;
 	}
+	if (window != NULL) {
+		// Get monitor properties
+		const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+		int monitorWidth = mode->width;
+		int monitorHeight = mode->height;
+
+		// Calculate position to center window
+		int windowWidth, windowHeight;
+		glfwGetWindowSize(window, &windowWidth, &windowHeight);
+		int windowPosX = (monitorWidth - windowWidth) / 2;
+		int windowPosY = (monitorHeight - windowHeight) / 2;
+
+		// Set window position
+		glfwSetWindowPos(window, windowPosX, windowPosY);
+	}
 
 	glfwMakeContextCurrent(window);
-	glViewport(0, 0, 816, 489);
+
 	gladLoadGL();
+	glViewport(0, 0, 816, 489);
 
 
 

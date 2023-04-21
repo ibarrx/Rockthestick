@@ -54,7 +54,6 @@ namespace Menu
             process.Start();
             this.WindowState = FormWindowState.Minimized;
 
-            // Optionally, you can wait for the process to exit before continuing
 
                 process.WaitForExit();
                 if (process.HasExited)
