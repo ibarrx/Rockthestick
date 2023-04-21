@@ -5,6 +5,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 
+#include "Movement.h"
+
 // Vertices coordinates
 GLfloat vertices[] =
 { //     COORDINATES     /        COLORS      /   TexCoord  //
@@ -20,7 +22,11 @@ GLuint indices[] =
 	0, 3, 2 // Lower triangle
 };
 
+Movement character;
 
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods){
+	character.key_cb(window, key, action);
+}
 
 int main()
 {
@@ -73,8 +79,16 @@ int main()
 	//glBindTexture(GL_TEXTURE_2D, 0);
 
 	//While events are going on in window, show the window
+	
+	glfwSetKeyCallback(window, key_callback);
+
 	while (!glfwWindowShouldClose(window))
 	{
+		float delta = 0.01f;
+		character.update(delta);
+		glClearColor(0.07f, 0.13f, 0.17, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
