@@ -24,6 +24,7 @@
     <ProjectGuid>{804cd92d-d54f-41fa-8e9a-97463999875e}</ProjectGuid>
     <RootNamespace>RockTheStick</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Game</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -73,6 +74,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>C:\Users\Angel\source\repos\Rockthestick\Libraries\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Angel\source\repos\Rockthestick\Libraries\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>\Rockthestick\x64\$(Configuration)\Game\net6.0-windows\</OutDir>
+    <IntDir>\Rockthestick\x64\$(Configuration)\Game\net6.0-windows\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

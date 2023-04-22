@@ -38,9 +38,35 @@ void soundPlay()
 	std::cout << played << std::endl;
 }
 
+bool loadIcon(GLFWwindow* window) {
+	int width, height, channels;
+	unsigned char* pixels = stbi_load("C:\\Users\\Angel\\source\\repos\\Rockthestick\\Rock.ico", &width, &height, &channels, 4);
+
+	if (!pixels) {
+		return false;
+	}
+
+	GLFWimage image[1];
+	image[0].width = width;
+	image[0].height = height;
+	image[0].pixels = pixels;
+
+	glfwSetWindowIcon(window, 1, image);
+
+	//stbi_image_free(m_Icon[0].pixels);
+	return true;
+}
+
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+	bool playAudio = _stricmp(lpCmdLine, "true") == 0;
+
+	// Use the value of the command line argument to determine whether to play music or not
+	if (playAudio)
+	{
+		soundPlay();
+	}
 	glfwInit();
 
 	//glfw Version set
@@ -49,7 +75,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//using Core Profile
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	//Create a window
-	GLFWwindow* window = glfwCreateWindow(816, 489, "RockTheStick", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(816, 489, "Game", NULL, NULL);
 	//Window error check
 	if (window == NULL)
 	{
@@ -57,7 +83,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		glfwTerminate();
 		return -1;
 	}
-	if (window != NULL) {
+	else
+	{
 		// Get monitor properties
 		const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 		int monitorWidth = mode->width;
@@ -74,11 +101,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 
 	glfwMakeContextCurrent(window);
+	loadIcon(window);
 
 	gladLoadGL();
 	glViewport(0, 0, 816, 489);
-
-
 
 	glClearColor(0.07f, 0.13f, 0.17, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -109,14 +135,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	glfwSetKeyCallback(window, key_callback);
 
-	soundPlay();
 
 	while (!glfwWindowShouldClose(window))
 	{
 
 		float delta = 0.01f;
 		character.update(delta);
-		glClearColor(0.07f, 0.13f, 0.17, 1.0f);
+		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glfwSwapBuffers(window);
 		glfwPollEvents();

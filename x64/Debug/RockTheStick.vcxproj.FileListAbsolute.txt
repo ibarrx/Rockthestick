@@ -1,2 +1,1 @@
-C:\Users\Coco\source\repos\Rockthestick\x64\Debug\RockTheStick.exe
-C:\Users\Angel\source\repos\RockTheStick\x64\Debug\RockTheStick.exe
+C:\Users\Angel\source\repos\RockTheStick\x64\Debug\Game.exe

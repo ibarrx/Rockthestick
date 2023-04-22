@@ -38,9 +38,6 @@ namespace Menu
             {
                 soundPlayer.Stop();
             }
-
-           
-
         }
 
         private void btnStartGame_Click(object sender, EventArgs e)
@@ -50,10 +47,11 @@ namespace Menu
 
             // Start the compiled C++ executable
             Process process = new Process();
-            process.StartInfo.FileName = "C:\\Users\\Angel\\source\\repos\\Rockthestick\\x64\\Debug\\RockTheStick.exe";
+            process.StartInfo.FileName = "Game.exe";
+
+            process.StartInfo.Arguments = checkAudio.Checked.ToString(); 
             process.Start();
             this.WindowState = FormWindowState.Minimized;
-
 
                 process.WaitForExit();
                 if (process.HasExited)
@@ -71,6 +69,10 @@ namespace Menu
                 }
         }
 
-
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            option options = new option();
+            options.Show();
+        }
     }
 }

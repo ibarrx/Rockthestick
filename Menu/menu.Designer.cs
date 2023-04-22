@@ -39,8 +39,7 @@
             // 
             // btnStartGame
             // 
-            this.btnStartGame.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStartGame.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.btnStartGame.BackColor = System.Drawing.Color.DimGray;
             this.btnStartGame.Font = new System.Drawing.Font("NiseSegaSonic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnStartGame.ForeColor = System.Drawing.SystemColors.Control;
@@ -63,6 +62,7 @@
             this.btnSettings.Size = new System.Drawing.Size(68, 56);
             this.btnSettings.TabIndex = 1;
             this.btnSettings.UseVisualStyleBackColor = false;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // openFileDialog1
             // 
