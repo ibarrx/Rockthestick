@@ -58,30 +58,6 @@ bool loadIcon(GLFWwindow* window) {
 	return true;
 }
 
-bool isAppRunning(const std::wstring& appName)
-{
-	bool found = false;
-	HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-	if (hSnapshot == INVALID_HANDLE_VALUE) {
-		return false;
-	}
-
-	PROCESSENTRY32 processEntry;
-	processEntry.dwSize = sizeof(PROCESSENTRY32);
-
-	if (Process32First(hSnapshot, &processEntry)) {
-		do {
-			if (_wcsicmp(processEntry.szExeFile, appName.c_str()) == 0) {
-				found = true;
-				break;
-			}
-		} while (Process32Next(hSnapshot, &processEntry));
-	}
-
-	CloseHandle(hSnapshot);
-	return found;
-}
-
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -163,11 +139,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	while (!glfwWindowShouldClose(window))
 	{
-		bool isMainOpen = isAppRunning(L"Menu.exe");
-		if (!isMainOpen)
-		{
-			return 0;
-		}
 
 		float delta = 0.01f;
 		character.update(delta);

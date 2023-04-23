@@ -1,5 +1,5 @@
 ﻿  main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22000.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
 C:\Users\Angel\source\repos\Rockthestick\Libraries\include\glad\glad.h(32,1): message : see previous definition of 'APIENTRY'
-C:\Users\Angel\source\repos\Rockthestick\main.cpp(142,39): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-  RockTheStick.vcxproj -> C:\Users\Angel\Source\Repos\Rockthestick\x64\Debug\Game.exe
+C:\Users\Angel\source\repos\RockTheStick\main.cpp(110,39): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+  RockTheStick.vcxproj -> C:\Users\Angel\source\repos\RockTheStick\x64\Debug\Game.exe
