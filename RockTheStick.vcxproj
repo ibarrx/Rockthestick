@@ -75,10 +75,7 @@
     <IncludePath>C:\Users\Angel\source\repos\Rockthestick\Libraries\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Angel\source\repos\Rockthestick\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>\Rockthestick\x64\$(Configuration)\Game\net6.0-windows\</OutDir>
-    <IntDir>\Rockthestick\x64\$(Configuration)\Game\net6.0-windows\</IntDir>
-  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>

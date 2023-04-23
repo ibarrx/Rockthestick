@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RockTheStick", "RockTheStick.vcxproj", "{804CD92D-D54F-41FA-8E9A-97463999875E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "RockTheStick.vcxproj", "{804CD92D-D54F-41FA-8E9A-97463999875E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Menu", "Menu\Menu.csproj", "{1C5B3CDB-9091-4116-BFE8-44F42332D247}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockTheStick", "Menu\RockTheStick.csproj", "{1C5B3CDB-9091-4116-BFE8-44F42332D247}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

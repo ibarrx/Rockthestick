@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Angel\\Source\\Repos\\Rockthestick\\Menu\\Menu.csproj",
-      "projectName": "Menu",
-      "projectPath": "C:\\Users\\Angel\\Source\\Repos\\Rockthestick\\Menu\\Menu.csproj",
+      "projectUniqueName": "C:\\Users\\Angel\\Source\\Repos\\Rockthestick\\Menu\\RockTheStick.csproj",
+      "projectName": "RockTheStick",
+      "projectPath": "C:\\Users\\Angel\\Source\\Repos\\Rockthestick\\Menu\\RockTheStick.csproj",
       "packagesPath": "C:\\Users\\Angel\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Angel\\Source\\Repos\\Rockthestick\\Menu\\obj\\",
       "projectStyle": "PackageReference",
