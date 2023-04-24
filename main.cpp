@@ -61,13 +61,33 @@ bool loadIcon(GLFWwindow* window) {
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	bool playAudio = _stricmp(lpCmdLine, "true") == 0;
+	// Get the entire command line string
+	LPWSTR wideCmdLine = GetCommandLineW();
+	int argc;
+	LPWSTR* argv = CommandLineToArgvW(wideCmdLine, &argc);
 
-	// Use the value of the command line argument to determine whether to play music or not
-	if (playAudio)
+	if (argc >= 3)
 	{
-		soundPlay();
+		// Get the command line arguments for audio and training options
+		const char* audioArg = CW2A(argv[1]);
+		const char* trainingArg = CW2A(argv[2]);
+
+		// Convert the command line arguments to boolean values
+		bool playAudio = _stricmp(audioArg, "true") == 0;
+		bool isTraining = _stricmp(trainingArg, "true") == 0;
+
+		// Use the values of the command line arguments to determine whether to enable audio and training options
+		if (playAudio)
+		{
+			soundPlay();
+		}
+
+		if (isTraining)
+		{
+			// Code to handle when training is enabled
+		}
 	}
+
 	glfwInit();
 
 	//glfw Version set
@@ -152,5 +172,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	/*glDeleteTextures(1, &texture);*/
 	glfwDestroyWindow(window);
 	glfwTerminate();
+	LocalFree(argv);
 	return 0;
 }

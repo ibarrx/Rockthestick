@@ -49,7 +49,7 @@ namespace Menu
             Process process = new Process();
             process.StartInfo.FileName = "C:\\Users\\Angel\\source\\repos\\Rockthestick\\x64\\Debug\\Game.exe";
 
-            process.StartInfo.Arguments = checkAudio.Checked.ToString(); 
+            process.StartInfo.Arguments = checkAudio.Checked.ToString() + " ";
             process.Start();
             this.WindowState = FormWindowState.Minimized;
 

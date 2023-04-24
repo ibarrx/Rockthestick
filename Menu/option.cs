@@ -28,8 +28,8 @@ namespace Menu
             if(isTraining.Checked)
             {
                 Process process = new Process();
-                process.StartInfo.FileName = "Game.exe";
-                //process.StartInfo.Arguments = "training = " + isTraining.Checked.ToString();
+                process.StartInfo.FileName = "C:\\Users\\Angel\\source\\repos\\Rockthestick\\x64\\Debug\\Game.exe"; 
+                process.StartInfo.Arguments = isTraining.Checked.ToString();
             }
         }
     }
