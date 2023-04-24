@@ -24,6 +24,7 @@
     <ProjectGuid>{804cd92d-d54f-41fa-8e9a-97463999875e}</ProjectGuid>
     <RootNamespace>RockTheStick</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Game</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -74,6 +75,7 @@
     <IncludePath>C:\Users\Angel\source\repos\Rockthestick\Libraries\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Angel\source\repos\Rockthestick\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -111,9 +113,9 @@
       <AdditionalIncludeDirectories>C:\Users\Coco\source\repos\Rockthestick\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;SDL2Main.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;sfml-audio.lib;Winmm.lib;MSVCRTD.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\Coco\source\repos\Rockthestick\Libraries\lib;C:\Users\Coco\source\repos\Rockthestick\Libraries\include;C:\Users\Angel\source\repos\Rockthestick\Libraries\include;C:\Users\Angel\source\repos\Rockthestick\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
@@ -129,12 +131,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Angel\source\repos\Rockthestick\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;Winmm.lib;MSVCRTD.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Angel\source\repos\Rockthestick\Libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -145,13 +150,13 @@
     <Image Include="D:\Chrome\bg.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bot.h" />
-    <ClInclude Include="Movement.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="resource.h" />
+    <ResourceCompile Include="RockTheStick.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="RockTheStick.rc" />
+    <ClInclude Include="RockTheStick\Bot.h" />
+    <ClInclude Include="RockTheStick\Movement.h" />
+    <ClInclude Include="RockTheStick\Player.h" />
+    <ClInclude Include="RockTheStick\resource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
