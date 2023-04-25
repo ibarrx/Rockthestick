@@ -1,24 +1,4 @@
-#include <QtCore/QCoreApplication>
-#include <iostream>
-#include <windows.h>
-#include <atlbase.h>
-#include <wmp.h>
-#include <tlhelp32.h>
-#include "Movement.h"
-#define STB_IMAGE_IMPLEMENTATION
-#include <stb/stb_image.h>
-#include <QApplication>
-#include <QMainWindow>
-#include <QIcon>
-#include <QtOpenGL>
-#include <QLabel>
-#include <QUiLoader>
-#include <QFile>
-#include "qcheckbox.h"
-#include "qstyle.h"
-#include "qpushbutton.h"
-#include "qboxlayout.h"
-
+#include "Includes.h"
 
 
 
@@ -32,8 +12,18 @@ void soundPlay()
 
 int main(int argc, char* argv[])
 {
+
     // Initialize Qt application
     QApplication app(argc, argv);
+    bool playAudio = true;
+    if (argc > 1)
+    {
+        std::string audioArg(argv[1]);
+        if (audioArg == "False" || audioArg == "false")
+        {
+            playAudio = false;
+        }
+    }
 
     // Load the UI file
     QUiLoader loader;
@@ -62,6 +52,8 @@ int main(int argc, char* argv[])
 
     // Close the widget
     widget->close();
+
+
 
     // Create main window
     QMainWindow* mainWindow = new QMainWindow();
@@ -95,12 +87,17 @@ int main(int argc, char* argv[])
     mainWindow->move(x, y);
 
     // Show the main window
+
     mainWindow->show();
         });
 
+
     // Show the widget
     widget->show();
-
+    if (playAudio)
+    {
+        soundPlay();
+    }
     // Run the event loop
     return app.exec();
 }

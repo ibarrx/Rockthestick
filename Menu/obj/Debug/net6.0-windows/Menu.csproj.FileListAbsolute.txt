@@ -23,7 +23,6 @@ C:\Users\Angel\Source\Repos\Rockthestick1\Menu\bin\Debug\net6.0-windows\Menu.run
 C:\Users\Angel\Source\Repos\Rockthestick1\Menu\bin\Debug\net6.0-windows\Menu.dll
 C:\Users\Angel\Source\Repos\Rockthestick1\Menu\bin\Debug\net6.0-windows\Menu.pdb
 C:\Users\Angel\Source\Repos\Rockthestick1\Menu\obj\Debug\net6.0-windows\Menu.csproj.AssemblyReference.cache
-C:\Users\Angel\Source\Repos\Rockthestick1\Menu\obj\Debug\net6.0-windows\Menu.option.resources
 C:\Users\Angel\Source\Repos\Rockthestick1\Menu\obj\Debug\net6.0-windows\Menu.Properties.Resources.resources
 C:\Users\Angel\Source\Repos\Rockthestick1\Menu\obj\Debug\net6.0-windows\Menu.RockTheStick.resources
 C:\Users\Angel\Source\Repos\Rockthestick1\Menu\obj\Debug\net6.0-windows\Menu.csproj.GenerateResource.cache
