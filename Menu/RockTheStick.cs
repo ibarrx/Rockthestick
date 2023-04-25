@@ -20,8 +20,8 @@ namespace Menu
 
         private void menu_Load(object sender, EventArgs e)
         {
-            
-            if(checkAudio.Checked)
+
+            if (checkAudio.Checked)
             {
                 playMenuMusic();
             }
@@ -30,7 +30,7 @@ namespace Menu
 
         private void checkAudio_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkAudio.Checked)
+            if (checkAudio.Checked)
             {
                 playMenuMusic();
             }
@@ -47,32 +47,27 @@ namespace Menu
 
             // Start the compiled C++ executable
             Process process = new Process();
-            process.StartInfo.FileName = "C:\\Users\\Angel\\source\\repos\\Rockthestick\\x64\\Debug\\Game.exe";
+            process.StartInfo.FileName = @"..\..\..\..\Rockthestick\x64\Debug\main.exe";
 
             process.StartInfo.Arguments = checkAudio.Checked.ToString() + " ";
+
             process.Start();
             this.WindowState = FormWindowState.Minimized;
 
-                process.WaitForExit();
-                if (process.HasExited)
+            process.WaitForExit();
+            if (process.HasExited)
+            {
+                this.WindowState = originalWindowState;
+                this.BringToFront();
+                this.Activate();
+
+                if (checkAudio.Checked)
                 {
-                    this.WindowState = originalWindowState;
-                    this.BringToFront();
-                    this.Activate();
-
-                    if (checkAudio.Checked)
-                    {
-                        soundPlayer.Play();
-                    }
-                    // You can also close the process when you're done with it
-                    process.Close();
+                    soundPlayer.Play();
                 }
-        }
-
-        private void btnSettings_Click(object sender, EventArgs e)
-        {
-            option options = new option();
-            options.Show();
+                // You can also close the process when you're done with it
+                process.Close();
+            }
         }
     }
 }

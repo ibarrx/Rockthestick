@@ -57,29 +57,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnSettings.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAEQAAABECAYAAAA4E5OyAAAABGdBTUEAALGPC/xhBQAAAzBJREFUeF7t
-        mrur1EAUxi8+sBFRQXx0vsD/QBuxsRMLGytFSxu1sLGyUFALsRcsxEZrRbEVtLqlDwQtFBFEQbBQEfHx
-        nd098Hn4MjvZvdlNcucHP5KcmcPM2ezNzWSzUCgUCoVCoVAoRP6SGyxAcNttCywHuGjT2QE5/hMuC7jo
-        lKfgskAVr/wDmR+jbafhAteG40n8BTvLc6iKmtZNsJN8gqqgae00b6Aqyt0DmWNQ9XN7gSrMTKH6m53n
-        IJy0sEnzWon9KXyDqqhFmIPKZTvDGqgKcHO5BFW+2xlWQ1WAm8txqPLdzrASqgLcwzCHr1Dlu53kAZy0
-        mEnzWo8q7AxMYesYldcLVGGm3dorqj4Ms7XYdUKxbbR1VFHT2iri2WNi25NwvFR+hK0hTo5RbTE2iamT
-        MHd4YuM01kHbvzI4Gm5jv5S7ofN7tJ0rW0ZbR026SoaP38PYt8pWwWuRk7Rfxy/h2OBjcz/cCVdQzG0N
-        62GcXFMyrb1erII8saXSsX/Pdhx/lzEsbuO3jnFrkkMwovq5deHceC2bGzwpNoXqb6Z4PNoynPvBAsSR
-        0Xbm8KTcHFSeKtrOPPdxDkCOc9sJ6LGZ3KRth6mldw6nocp17ZmJodrq2jhqUPcpzEXlu3uhcReq9jo2
-        jhrUtecbuah89wJ0VHuudu/SOGpgNoddUOW6zjOo2us4M9SdY+4EVN5baPix/XjN7VHrbw+sz1FM+Y72
-        j8JG4YHZFOdhVc4NqNrYq7AK1T/aKGpAV5E667ZyVXH2ERyHymMb4yVUA07jdRFjc0jdEjyEjVB1/VgK
-        jXswxr/DXGKu2Thq0LpWrV7Vt+8mzCXmmjPBBno13B0QJ5HyMnTOwo3D3QH3Yewf1yspYq45F+q8FlWF
-        6uvm8BqqXJNPwky4CHkCn6HDcVMR+0T3wXGoPHamxCs8sxlWtTm2FuI+SltcVqH6R+eCveNxa7j7H3Yr
-        Pg5VhNK/LfERQco7sNOMu33PsXeoInPtHVXvoNWxV6gC69or7EGRKu4F5Lhp90CGrVc43ktUYVy0vRXN
-        XIO5r2b1Bv5AtlqgMPxlr3wYhUKhUCgUesTCwj+Fr/8TnRVcPgAAAABJRU5ErkJggg==
-</value>
-  </data>
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="picLogo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAA2QAAAK4CAYAAAAbYz4oAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
