@@ -109,6 +109,7 @@
     <QtRcc Include="resources.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="menu.ui" />
     <QtUic Include="Widget.ui" />
   </ItemGroup>
   <ItemGroup>

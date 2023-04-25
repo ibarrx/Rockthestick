@@ -3,5 +3,7 @@
         <file>Rock.ico</file>
         <file>settingbg.png</file>
         <file>bg.png</file>
+        <file>back.png</file>
+        <file>title.png</file>
     </qresource>
 </RCC>
