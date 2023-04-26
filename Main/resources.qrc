@@ -3,23 +3,23 @@
         <file>Rock.ico</file>
         <file>settingbg.png</file>
         <file>bg.png</file>
-        <file>Stickman Designs/user/celebration.png</file>
-        <file>Stickman Designs/user/dead.png</file>
-        <file>Stickman Designs/user/Kick1.png</file>
-        <file>Stickman Designs/user/Kick2.png</file>
-        <file>Stickman Designs/user/normal.png</file>
-        <file>Stickman Designs/user/Punch1.png</file>
-        <file>Stickman Designs/user/Punch2.png</file>
-        <file>Stickman Designs/user/Walk1.png</file>
-        <file>Stickman Designs/user/Walk2.png</file>
-        <file>Stickman Designs/enemy/celebration.png</file>
-        <file>Stickman Designs/enemy/dead.png</file>
+        <file>Stickman Designs/enemy/Celebration.png</file>
+        <file>Stickman Designs/enemy/Dead.png</file>
         <file>Stickman Designs/enemy/Kick1.png</file>
         <file>Stickman Designs/enemy/Kick2.png</file>
-        <file>Stickman Designs/enemy/normal.png</file>
+        <file>Stickman Designs/enemy/Normal.png</file>
         <file>Stickman Designs/enemy/Punch1.png</file>
         <file>Stickman Designs/enemy/Punch2.png</file>
         <file>Stickman Designs/enemy/Walk1.png</file>
         <file>Stickman Designs/enemy/Walk2.png</file>
+        <file>Stickman Designs/user/Celebration.png</file>
+        <file>Stickman Designs/user/Dead.png</file>
+        <file>Stickman Designs/user/Kick1.png</file>
+        <file>Stickman Designs/user/Kick2.png</file>
+        <file>Stickman Designs/user/Normal.png</file>
+        <file>Stickman Designs/user/Punch1.png</file>
+        <file>Stickman Designs/user/Punch2.png</file>
+        <file>Stickman Designs/user/Walk1.png</file>
+        <file>Stickman Designs/user/Walk2.png</file>
     </qresource>
 </RCC>

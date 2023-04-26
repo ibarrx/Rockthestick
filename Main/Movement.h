@@ -22,19 +22,23 @@ public:
 	float verticalPos = 0.0f;
 	float verticalVel = 0.0f;
 	bool jump = false;
+	char keypress;
 
 	void key_cb(GLFWwindow* window, unsigned char key, int action) {
 		if (key == 'W' && action == GLFW_PRESS) {
 			if (!jump) {
 				verticalVel = JUMP_VEL;
 				jump = true;
+				keypress = 'W';
 			}
 		}
 		if (key == 'A' && action == GLFW_PRESS) {
 			horizontalPos -= MOVE_DIST;
+			keypress = 'A';
 		}
 		if (key == 'D' && action == GLFW_PRESS) {
 			horizontalPos += MOVE_DIST;
+			keypress = 'D';
 		}
 	};
 

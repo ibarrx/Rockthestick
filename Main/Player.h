@@ -9,8 +9,55 @@
 
 #include "Movement.h"
 
-class Player : public Movement {
+class Player : public Movement 
+{
 
+	public:
+
+	int hp;
+
+	Player()
+	{
+		hp = 100;
+	}
+
+	bool isDead()
+	{
+		if (hp <= 0)
+		{
+			std::cout << "You Died" << std::endl;
+			return true;
+		}
+		return false;
+	}
+
+	void action()
+	{
+		switch (Movement::keypress)
+		{
+			case 'W':
+
+				break;
+
+			case 'A':
+
+				break;
+
+			case 'D':
+
+				break;
+
+			case 'J':
+
+				break;
+
+			case 'L':
+
+				break;
+
+			default:
+		}
+	}
 };
 
 #endif
