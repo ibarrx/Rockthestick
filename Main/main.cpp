@@ -10,6 +10,12 @@ void soundPlay()
     std::cout << played << std::endl;
 }
 
+void menuSoundPlay()
+{
+    bool played = PlaySound(_T("sounds/MenuLoopable.wav"), NULL, SND_LOOP | SND_ASYNC);
+    std::cout << played << std::endl;
+}
+
 int main(int argc, char* argv[])
 {
 
@@ -25,16 +31,56 @@ int main(int argc, char* argv[])
         }
     }
 
-    // Load the UI file
     QUiLoader loader;
-    QFile file("Widget.ui");
+    QFile file("menu.ui");
     file.open(QIODevice::ReadOnly);
-    QWidget* widget = loader.load(&file);
+    QWidget* menu = loader.load(&file);
     file.close();
+    if (!menu) {
+        qDebug() << "Failed to load UI file";
+        return 1;
+    }
+    QIcon icon("Rock.ico"); // Replace with your icon file path
+    
+    menu->setWindowIcon(icon);
+    menu->setWindowTitle("RockTheStick");
+
+    QCheckBox* isAudio = menu->findChild<QCheckBox*>("checkAudio");
+    QPushButton* btnStartGame = menu->findChild<QPushButton*>("btnStartGame");
+
+    QPixmap menuBkgnd("back.png");
+    if (menuBkgnd.isNull()) {
+        qDebug() << "Error loading image file";
+        return;
+    }
+
+    QObject::connect(btnStartGame, &QPushButton::clicked, [menu, isAudio, &app]() {
+        // Check if checkbox is checked
+        if (isAudio && isAudio->isChecked()) {
+            menuSoundPlay();
+        }
+
+    if (btnStartGame)
+    {
+
+    }
+
+    // Close the widget
+    menu->close();
+        });
+
+    // Load the UI file
+    QUiLoader loader1;
+    QFile file1("Widget.ui");
+    file1.open(QIODevice::ReadOnly);
+    QWidget* widget = loader.load(&file1);
+    file1.close();
     if (!widget) {
         qDebug() << "Failed to load UI file";
         return 1;
     }
+    widget->setWindowIcon(icon);
+    widget->setWindowTitle("RockTheStick");
 
     // Find the isTraining checkbox and btnGo button by name
     QCheckBox* checkbox = widget->findChild<QCheckBox*>("isTraining");
@@ -61,8 +107,8 @@ int main(int argc, char* argv[])
     mainWindow->setGeometry(100, 100, 816, 489); // Set window geometry
 
     // Set window icon
-    QIcon icon("Rock.ico"); // Replace with your icon file path
-    mainWindow->setWindowIcon(icon);
+    QIcon icon2("Rock.ico");
+    mainWindow->setWindowIcon(icon2);
 
     // Load and scale background image
     QPixmap bkgnd("bg.png");

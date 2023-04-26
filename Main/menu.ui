@@ -18,6 +18,7 @@
 background-repeat: no-repeat;
 background-position: center center;
 background-attachment: fixed;
+background-size: 100% 100%;
 </string>
   </property>
   <widget class="QPushButton" name="btnStartGame">
@@ -38,7 +39,7 @@ QLineEdit {background-color: rgb(188, 188, 188)}</string>
     <string>Start Game</string>
    </property>
   </widget>
-  <widget class="QCheckBox" name="checkBox">
+  <widget class="QCheckBox" name="checkAudio">
    <property name="geometry">
     <rect>
      <x>710</x>
@@ -52,6 +53,29 @@ QLineEdit {background-color: rgb(188, 188, 188)}</string>
    </property>
    <property name="text">
     <string>Audio?</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblPic">
+   <property name="geometry">
+    <rect>
+     <x>-90</x>
+     <y>-20</y>
+     <width>1001</width>
+     <height>441</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/new/prefix1/title.png);
+background-repeat: no-repeat;
+background-position: center center;
+background-size: 100% 100%; /* Change this line */
+</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>
