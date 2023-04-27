@@ -5,34 +5,46 @@
 #include <iostream>
 #include <fstream>
 #include <time.h>
+#include <ctime>
+#include <chrono>
 #include <stdlib.h>
+#include <random>
 
-#include "Movement.h"
+#include "Character.h"
 
-class Enemy : public Movement {
-
+class Enemy : public Character {
+private:
+	Character* enemy = new Character;
 public:
+	Enemy(){ }
 
-	int hp;
+	void randmove(){
+		int randomTime = rand() % 3;
+		if (randomTime == 0) {
+			std::chrono::seconds waitTime(5);
+		}
+		else if (randomTime == 1) {
+			std::chrono::seconds waitTime(3);
+		}
+		else {
+			std::chrono::seconds waitTime(1);
+		}
 
-	Enemy()
-	{
-		hp = 100;
+		int random = rand() % 100;
+		if (random % 2 == 0) {
+			enemy->character->moveLeft();
+		}
+		else {
+			enemy->character->moveRight();
+		}
 	}
 
-	bool isDead()
-	{
-		if (hp <= 0)
-		{
-			std::cout << "You Win" << std::endl;
+	bool isDead() {
+		if (enemy->hp <= 0) { 
+			std::cout << "You Win!" << std::endl; 
 			return true;
 		}
-		return false;
-	}
-
-	void randmove()
-	{
-
+		else return false;
 	}
 };
 
