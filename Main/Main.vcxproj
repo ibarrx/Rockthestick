@@ -63,6 +63,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>C:\Users\Angel\source\repos\Rockthestick\Libraries\include;C:\Users\Angel\source\repos\Rockthestick1\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\Users\Angel\source\repos\Rockthestick\Libraries\lib;C:\Users\Angel\source\repos\Rockthestick1\Libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -72,6 +73,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>C:\Users\Angel\source\repos\Rockthestick\Libraries\include;C:\Users\Angel\source\repos\Rockthestick1\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\Users\Angel\source\repos\Rockthestick\Libraries\lib;C:\Users\Angel\source\repos\Rockthestick1\Libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -106,19 +108,21 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="resources.qrc" />
-  </ItemGroup>
-  <ItemGroup>
     <QtUic Include="menu.ui" />
     <QtUic Include="Widget.ui" />
+    <QtUic Include="Widget1.ui" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Includes.h" />
     <ClInclude Include="Movement.h" />
+    <ClInclude Include="Includes.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="QTOpenGLH.h" />
     <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="resources.qrc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

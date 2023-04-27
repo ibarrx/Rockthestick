@@ -1,9 +1,47 @@
+//Includes
 #include "Includes.h"
-
-#pragma comment(lib, "winmm.lib")
+//Modular Variables
 bool menuSoundPlaying = false;
 bool fullBattleSoundPlaying = false;
 
+//Classes
+class MainWindow : public QMainWindow {
+public:
+    MainWindow() {
+        // Set the GLFW key callback function with a pointer to this instance
+        glfwSetWindowUserPointer(glfwGetCurrentContext(), this);
+        glfwSetKeyCallback(glfwGetCurrentContext(), key_callback);
+    }
+
+    void update() {
+        // Update the movement
+        movement.update(0.16f); // Pass the delta time between frames
+
+        // Redraw the scene
+        movement.draw();
+    }
+
+private:
+    Movement movement;
+
+    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+        // Cast the user pointer back to a MainWindow pointer
+        MainWindow* mainWindow = static_cast<MainWindow*>(glfwGetWindowUserPointer(window));
+
+        // Access the movement variable relative to the MainWindow instance
+        if (key == GLFW_KEY_W && action == GLFW_PRESS) {
+            mainWindow->movement.key_cb(window, 'w', GLFW_PRESS);
+        }
+        if (key == GLFW_KEY_A && action == GLFW_PRESS) {
+            mainWindow->movement.key_cb(window, 'a', GLFW_PRESS);
+        }
+        if (key == GLFW_KEY_D && action == GLFW_PRESS) {
+            mainWindow->movement.key_cb(window, 'd', GLFW_PRESS);
+        }
+    }
+};
+
+//Functions
 void soundPlay()
 {
     fullBattleSoundPlaying = true;
@@ -36,6 +74,8 @@ void stopFullBattleSound()
     }
 }
 
+
+//Main Function
 int main(int argc, char* argv[])
 {
     // Initialize Qt application
@@ -137,6 +177,7 @@ int main(int argc, char* argv[])
     QMainWindow* mainWindow = new QMainWindow();
     mainWindow->setWindowTitle("RockTheStick");
     mainWindow->setGeometry(100, 100, 816, 489); // Set window geometry
+    QMainWindow window;
 
     // Set window icon
     mainWindow->setWindowIcon(icon);
@@ -166,6 +207,10 @@ int main(int argc, char* argv[])
     mainWindow->setMaximumWidth(mainWindow->width());
     // Show the main window
     mainWindow->show();
+    GLWidget* glWidget = new GLWidget();
+    window.setCentralWidget(glWidget);
+    window.show();
+
         });
 
     // Show the widget
