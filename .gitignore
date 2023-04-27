@@ -28,3 +28,4 @@ main/x64
 /Menu/bin/Debug/net6.0-windows
 /.vs/ProjectEvaluation
 /Menu/obj
+/Main/Main.vcxproj.user
