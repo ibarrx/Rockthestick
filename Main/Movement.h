@@ -1,4 +1,3 @@
-#pragma once
 #ifndef MOVEMENT_H
 #define MOVEMENT_H
 
@@ -7,9 +6,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <qmainwindow.h>
-#include "QTOpenGLH.h"
-
-
+#include "qopenglwidget.h"
 
 
 class Movement {
@@ -27,15 +24,15 @@ public:
     bool jump = false;
     static char keypress;
 
-    void key_cb(GLWidget* window, unsigned char key, int action) {
-        if (key == 'w' && action == QEvent::KeyPress) { // Jump
+    void key_cb(QOpenGLWidget* window, unsigned char key, int action) {
+        if (key == 'w' && action == keypress) { // Jump
             jumpAction();
         }
-        if (key == 'a' && action == QEvent::KeyPress) { // Move left
+        if (key == 'a' && action == keypress) { // Move left
             moveLeft();
             keypress = 'A';
         }
-        if (key == 'd' && action == QEvent::KeyPress) { // Move right
+        if (key == 'd' && action == keypress) { // Move right
             moveRight();
             keypress = 'D';
         }
