@@ -17,32 +17,30 @@ public:
 	Player(){ }
 	~Player() { delete player; }
 
-	void action(){
+	void action() {
 		switch (Movement::keypress)
 		{
 		case 'W':
-
+			// move up
 			break;
-
 		case 'A':
-
+			// move left
 			break;
-
 		case 'D':
-
+			// move right
 			break;
-
 		case 'J':
-
+			// jump
 			break;
-
 		case 'L':
-
+			// shoot
 			break;
-
 		default:
+			// do nothing for other keypresses
+			break;
 		}
 	}
+
 
 	bool isDead() {
 		if (player->hp <= 0) {

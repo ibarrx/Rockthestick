@@ -24,3 +24,9 @@ main/x64
 /Main/x64/Debug/qmake/temp/qtvars.vcxproj
 /Main/x64/Debug/qmake/temp/qtvars_x64_Debug.props
 /Main/x64/Debug/qmake/qtvars_x64_Debug.props
+/Menu/obj/Debug/net6.0-windows
+/Menu/bin/Debug/net6.0-windows
+/.vs/ProjectEvaluation
+/Menu/obj
+/Main/Main.vcxproj.user
+/.vs/Rockthestick/v17/Browse.VC.db

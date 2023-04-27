@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Coco\AppData\Local\Temp\cp0qr3xf.3o2;C:\Qt\6.5.0\msvc2019_64\include;C:\Qt\6.5.0\msvc2019_64\include\QtUiTools;C:\Qt\6.5.0\msvc2019_64\include\QtOpenGLWidgets;C:\Qt\6.5.0\msvc2019_64\include\QtOpenGL;C:\Qt\6.5.0\msvc2019_64\include\QtUiPlugin;C:\Qt\6.5.0\msvc2019_64\include\QtWidgets;C:\Qt\6.5.0\msvc2019_64\include\QtGui;C:\Qt\6.5.0\msvc2019_64\include\QtCore;C:\Users\Coco\AppData\Local\Temp\cp0qr3xf.3o2;/include;C:\Qt\6.5.0\msvc2019_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Angel\AppData\Local\Temp\mjnpwaqb.wfr;C:\Qt\6.5.0\msvc2019_64\include;C:\Qt\6.5.0\msvc2019_64\include\QtUiTools;C:\Qt\6.5.0\msvc2019_64\include\QtOpenGLWidgets;C:\Qt\6.5.0\msvc2019_64\include\QtOpenGL;C:\Qt\6.5.0\msvc2019_64\include\QtUiPlugin;C:\Qt\6.5.0\msvc2019_64\include\QtWidgets;C:\Qt\6.5.0\msvc2019_64\include\QtGui;C:\Qt\6.5.0\msvc2019_64\include\QtCore;C:\Users\Angel\AppData\Local\Temp\mjnpwaqb.wfr;/include;C:\Qt\6.5.0\msvc2019_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -utf-8 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>.\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>

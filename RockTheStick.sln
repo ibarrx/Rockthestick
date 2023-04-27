@@ -7,28 +7,16 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Main", "Main\Main.vcxproj",
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Debug|ARM64 = Debug|ARM64
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
-		Release|Any CPU = Release|Any CPU
-		Release|ARM64 = Release|ARM64
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{36B319E7-3058-4248-AB29-FC3538CB28D0}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{36B319E7-3058-4248-AB29-FC3538CB28D0}.Debug|Any CPU.Build.0 = Debug|x64
-		{36B319E7-3058-4248-AB29-FC3538CB28D0}.Debug|ARM64.ActiveCfg = Debug|x64
-		{36B319E7-3058-4248-AB29-FC3538CB28D0}.Debug|ARM64.Build.0 = Debug|x64
 		{36B319E7-3058-4248-AB29-FC3538CB28D0}.Debug|x64.ActiveCfg = Debug|x64
 		{36B319E7-3058-4248-AB29-FC3538CB28D0}.Debug|x64.Build.0 = Debug|x64
 		{36B319E7-3058-4248-AB29-FC3538CB28D0}.Debug|x86.ActiveCfg = Debug|x64
 		{36B319E7-3058-4248-AB29-FC3538CB28D0}.Debug|x86.Build.0 = Debug|x64
-		{36B319E7-3058-4248-AB29-FC3538CB28D0}.Release|Any CPU.ActiveCfg = Release|x64
-		{36B319E7-3058-4248-AB29-FC3538CB28D0}.Release|Any CPU.Build.0 = Release|x64
-		{36B319E7-3058-4248-AB29-FC3538CB28D0}.Release|ARM64.ActiveCfg = Release|x64
-		{36B319E7-3058-4248-AB29-FC3538CB28D0}.Release|ARM64.Build.0 = Release|x64
 		{36B319E7-3058-4248-AB29-FC3538CB28D0}.Release|x64.ActiveCfg = Release|x64
 		{36B319E7-3058-4248-AB29-FC3538CB28D0}.Release|x64.Build.0 = Release|x64
 		{36B319E7-3058-4248-AB29-FC3538CB28D0}.Release|x86.ActiveCfg = Release|x64

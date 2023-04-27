@@ -7,8 +7,8 @@
 #include "Movement.h"
 #include "Player.h"
 #include "Enemy.h"
-#define STB_IMAGE_IMPLEMENTATION
-#include <stb/stb_image.h>
+//#define STB_IMAGE_IMPLEMENTATION
+//#include <stb/stb_image.h>
 #include <QApplication>
 #include <QMainWindow>
 #include <QIcon>
@@ -20,9 +20,12 @@
 #include "qstyle.h"
 #include "qpushbutton.h"
 #include "qboxlayout.h"
+#include "qopengl.h"
+#include "qopenglwidget.h"
 #include <algorithm>
 #include <iostream>
 #include <string>
 #include <thread>
 #include <vector>
+#include "QTOpenGLH.h"
 #pragma once
