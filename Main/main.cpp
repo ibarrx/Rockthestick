@@ -81,11 +81,18 @@ int main(int argc, char* argv[])
     int y = (screen1.height() - menu->height()) / 2;
     menu->move(x, y);
 
-
-    QObject::connect(btnStartGame, &QPushButton::clicked, [menu, isAudio, &app, btnStartGame, icon]() {
+    QObject::connect(isAudio, &QCheckBox::clicked, [menu, isAudio]() {
         if (isAudio && isAudio->isChecked()) {
             menuSoundPlay();
         }
+        else if (isAudio && !isAudio->isChecked()) {
+            stopMenuSound();
+        }
+        });
+
+
+
+    QObject::connect(btnStartGame, &QPushButton::clicked, [menu, isAudio, &app, btnStartGame, icon]() {
 
     if (btnStartGame)
     {
