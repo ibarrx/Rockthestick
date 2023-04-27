@@ -110,7 +110,6 @@
   <ItemGroup>
     <QtUic Include="menu.ui" />
     <QtUic Include="Widget.ui" />
-    <QtUic Include="Widget1.ui" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />

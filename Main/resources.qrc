@@ -23,5 +23,6 @@
         <file>Rock.ico</file>
         <file>settingbg.png</file>
         <file>title.png</file>
+        <file>gameover.png</file>
     </qresource>
 </RCC>

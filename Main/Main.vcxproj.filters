@@ -34,9 +34,6 @@
     <QtUic Include="menu.ui">
       <Filter>Source Files</Filter>
     </QtUic>
-    <QtUic Include="Widget1.ui">
-      <Filter>Source Files</Filter>
-    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">

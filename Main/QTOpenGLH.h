@@ -17,6 +17,7 @@ protected:
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         // Draw your OpenGL scene here
+
     }
 
     void resizeGL(int w, int h) override

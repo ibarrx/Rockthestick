@@ -8,6 +8,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <qmainwindow.h>
+#include "QTOpenGLH.h"
 
 
 
@@ -27,15 +28,15 @@ public:
     bool jump = false;
     static char keypress;
 
-    void key_cb(GLFWwindow* window, unsigned char key, int action) {
-        if (key == 'w' && action == GLFW_PRESS) { // Jump
+    void key_cb(GLWidget* window, unsigned char key, int action) {
+        if (key == 'w' && action == QEvent::KeyPress) { // Jump
             jumpAction();
         }
-        if (key == 'a' && action == GLFW_PRESS) { // Move left
+        if (key == 'a' && action == QEvent::KeyPress) { // Move left
             moveLeft();
             keypress = 'A';
         }
-        if (key == 'd' && action == GLFW_PRESS) { // Move right
+        if (key == 'd' && action == QEvent::KeyPress) { // Move right
             moveRight();
             keypress = 'D';
         }
