@@ -2,7 +2,6 @@
 #ifndef MOVEMENT_H
 #define MOVEMENT_H
 
-#include <GLFW/glfw3.h>
 #include <iostream>
 #include <fstream>
 #include <time.h>
