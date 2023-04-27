@@ -176,4 +176,17 @@ int main(int argc, char* argv[])
     menu->show();
     // Run the event loop
     return app.exec();
+
+    Enemy win;
+    Player lose;
+
+    if (win.isDead() == true)
+    {
+        // shows the win screen
+    }
+
+    else if (lose.isDead() == true)
+    {
+        // shows the game over screen
+    }
 }

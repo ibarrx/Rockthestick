@@ -5,6 +5,8 @@
 #include <wmp.h>
 #include <tlhelp32.h>
 #include "Movement.h"
+#include "Player.h"
+#include "Enemy.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 #include <QApplication>
