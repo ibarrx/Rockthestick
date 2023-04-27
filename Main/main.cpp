@@ -206,10 +206,11 @@ int main(int argc, char* argv[])
     mainWindow->setMaximumHeight(mainWindow->height());
     mainWindow->setMaximumWidth(mainWindow->width());
     // Show the main window
+    window.show();
     mainWindow->show();
     GLWidget* glWidget = new GLWidget();
     window.setCentralWidget(glWidget);
-    window.show();
+
 
         });
 
