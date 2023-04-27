@@ -62,11 +62,16 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Angel\source\repos\Rockthestick1\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Coco\source\repos\Rockthestick\Libraries\include;C:\Users\Harol\source\repos\Rockthestick\Libraries\include;C:\Users\Angel\source\repos\Rockthestick1\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
+<<<<<<< HEAD
       <AdditionalLibraryDirectories>C:\Users\Angel\source\repos\Rockthestick1\Libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;sfml-audio.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+=======
+      <AdditionalLibraryDirectories>C:\Users\Coco\source\repos\Rockthestick\Libraries\lib;C:\Users\Harol\source\repos\Rockthestick\Libraries\lib;C:\Users\Angel\source\repos\Rockthestick1\Libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
+>>>>>>> main
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -113,6 +118,8 @@
     <QtUic Include="Widget.ui" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Includes.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="Player.h" />
