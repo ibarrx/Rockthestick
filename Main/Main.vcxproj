@@ -65,8 +65,13 @@
       <AdditionalIncludeDirectories>C:\Users\Coco\source\repos\Rockthestick\Libraries\include;C:\Users\Harol\source\repos\Rockthestick\Libraries\include;C:\Users\Angel\source\repos\Rockthestick1\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
+<<<<<<< HEAD
+      <AdditionalLibraryDirectories>C:\Users\Angel\source\repos\Rockthestick1\Libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;sfml-audio.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+=======
       <AdditionalLibraryDirectories>C:\Users\Coco\source\repos\Rockthestick\Libraries\lib;C:\Users\Harol\source\repos\Rockthestick\Libraries\lib;C:\Users\Angel\source\repos\Rockthestick1\Libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
+>>>>>>> main
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -75,7 +80,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\Users\Angel\source\repos\Rockthestick1\Libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;sfml-audio.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -109,6 +114,7 @@
     <QtRcc Include="resources.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="menu.ui" />
     <QtUic Include="Widget.ui" />
   </ItemGroup>
   <ItemGroup>

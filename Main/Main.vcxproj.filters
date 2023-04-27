@@ -36,6 +36,9 @@
     <QtUic Include="Widget.ui">
       <Filter>Source Files</Filter>
     </QtUic>
+    <QtUic Include="menu.ui">
+      <Filter>Source Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Movement.h">
