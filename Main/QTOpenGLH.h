@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include "Includes.h"
 class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -13,10 +14,9 @@ protected:
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     }
 
-    void paintGL() override
+    void paintGL()
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        // Draw your OpenGL scene here
 
     }
 

@@ -7,6 +7,7 @@
 #include "Movement.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "QTOpenGLH.h"
 //#define STB_IMAGE_IMPLEMENTATION
 //#include <stb/stb_image.h>
 #include <QApplication>
@@ -27,5 +28,4 @@
 #include <string>
 #include <thread>
 #include <vector>
-#include "QTOpenGLH.h"
 #pragma once

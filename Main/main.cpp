@@ -37,6 +37,32 @@ void stopFullBattleSound()
     }
 }
 
+void isWin(QOpenGLWidget* glWidget, QLabel* backgroundLabel)
+{
+    Enemy win;
+    Player lose;
+
+    QPixmap bkgnd("victoryroyale.png");
+    backgroundLabel->setPixmap(bkgnd);
+    backgroundLabel->setGeometry(0, 0, glWidget->width(), glWidget->height());
+    backgroundLabel->setScaledContents(true); // Set to stretch the background image
+    backgroundLabel->lower(); // Lower the background image to the bottom of the widget
+}
+
+void isLose(QOpenGLWidget* glWidget, QLabel* backgroundLabel)
+{
+    Enemy win;
+    Player lose;
+
+
+    QPixmap bkgnd("gameover.png");
+    backgroundLabel->setPixmap(bkgnd);
+    backgroundLabel->setGeometry(0, 0, glWidget->width(), glWidget->height());
+    backgroundLabel->setScaledContents(true); // Set to stretch the background image
+    backgroundLabel->lower(); // Lower the background image to the bottom of the widget
+    
+}
+
 
 //Main Function
 int main(int argc, char* argv[])
@@ -103,6 +129,7 @@ int main(int argc, char* argv[])
         stopMenuSound();
     }
 
+
     // Load the UI file
     QUiLoader loader1;
     QFile file1("Widget.ui");
@@ -136,35 +163,42 @@ int main(int argc, char* argv[])
     // Close the widget
     widget->close();
 
-    // Create main window
+   // Create main window
     QMainWindow* mainWindow = new QMainWindow();
+
+    // Create a new QWidget to use as the central widget
+    QWidget* centralWidget = new QWidget(mainWindow);
+
+    // Add the QOpenGLWidget as a child widget to the central widget
+    QOpenGLWidget* glWidget = new QOpenGLWidget(centralWidget);
+    glWidget->setGeometry(0, 0, 816, 489); // Set widget geometry
+
+    // Set the central widget of the main window
+    mainWindow->setCentralWidget(centralWidget);
+
+    // Set window properties
     mainWindow->setWindowTitle("RockTheStick");
     mainWindow->setGeometry(100, 100, 816, 489); // Set window geometry
-    QMainWindow window;
-
-
-    // Set window icon
     mainWindow->setWindowIcon(icon);
-
     // Load and scale background image
+
     QPixmap bkgnd("bg.png");
     if (bkgnd.isNull()) {
         qDebug() << "Error loading image file";
         return;
     }
 
-    QOpenGLWidget* glWidget = new QOpenGLWidget();
-    window.setCentralWidget(glWidget);
-
     QSize mainWindowSize = glWidget->size(); // Access size of mainWindow
     bkgnd = bkgnd.scaled(mainWindowSize, Qt::IgnoreAspectRatio); // Scale background image to mainWindow size
 
     // Create a QLabel for displaying the background image
     QLabel* backgroundLabel = new QLabel(glWidget);
+
     backgroundLabel->setPixmap(bkgnd);
     backgroundLabel->setGeometry(0, 0, glWidget->width(), glWidget->height());
     backgroundLabel->setScaledContents(true); // Set to stretch the background image
     backgroundLabel->lower(); // Lower the background image to the bottom of the widget
+
 
     // Center the main window on the screen
     QRect screenGeometry = QGuiApplication::primaryScreen()->geometry();
@@ -175,38 +209,19 @@ int main(int argc, char* argv[])
     mainWindow->setMaximumWidth(mainWindow->width());
     // Show the main window
     mainWindow->show();
-    window.show();
-
-    Enemy win;
-    Player lose;
-
-    if (win.isDead() == true)
-    {
-        // shows the win screen
-    }
-
-    else if (lose.isDead() == true)
-    {
-
-        QPixmap loseScreen("gameover.png");
-        if (bkgnd.isNull()) {
-            qDebug() << "Error loading image file";
-            return;
-        }
-        backgroundLabel->setPixmap(loseScreen);
-        backgroundLabel->setGeometry(0, 0, glWidget->width(), glWidget->height());
-        backgroundLabel->setScaledContents(true); // Set to stretch the background image
-        backgroundLabel->lower(); // Lower the background image to the bottom of the widget
-    }
         });
 
     // Show the widget
     widget->show();
+
         });
 
     // Show the menu
     menu->show();
+
     // Run the event loop
     return app.exec();
 
+    delete menu;
+   
 }

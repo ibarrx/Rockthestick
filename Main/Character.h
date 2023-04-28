@@ -3,28 +3,36 @@
 #define CHARACTER_H
 
 #include <iostream>
-#include <time.h>
-#include <random>
+#include <string>
+#include "Movement.h"
 
-#include <Movement.h>
+class Character {
+public:
+    Movement* character;
+    int hp;
+    std::string image_file;
 
-typedef class Character {
-public:	
-	Movement* character = new Movement;
-	int hp;
+    Character() : hp(100), image_file(""), character(new Movement()) {}
 
-	Character() : hp(100) {	}
-	~Character() { delete character; }
+    Character(std::string img_file) : hp(100), image_file(img_file), character(new Movement()) {}
 
-	virtual bool isDead() {
-		if (hp == 0) {
-			std::cout << "You're dead!" << std::endl;
-			return true;
-		}
-		return false;
-	}
+    virtual ~Character() { delete character; }
 
-} ch; 
+    virtual bool isDead() {
+        if (hp == 0) {
+            std::cout << "You're dead!" << std::endl;
+            return true;
+        }
+        return false;
+    }
 
+    void setImageFile(std::string img_file) {
+        image_file = img_file;
+    }
+
+    std::string getImageFile() const {
+        return image_file;
+    }
+};
 
 #endif CHARACTER_H
