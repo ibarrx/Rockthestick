@@ -110,7 +110,7 @@
     <QtUic Include="Widget.ui" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Character.h" />
+    <QtMoc Include="Character.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="Includes.h" />

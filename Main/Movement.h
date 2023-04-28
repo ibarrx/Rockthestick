@@ -2,18 +2,12 @@
 #define MOVEMENT_H
 
 #include <iostream>
-#include <fstream>
 #include <time.h>
 #include <stdlib.h>
 #include <qmainwindow.h>
 #include "qopenglwidget.h"
 
-
 class Movement {
-private:
-    static const float JUMP_VEL;
-    static const float MOVE_DIST;
-    static const float GRAVITY;
 public:
     Movement() {}
     ~Movement() {}
@@ -38,20 +32,20 @@ public:
         }
     }
 
-    void moveLeft() {
+    inline void moveLeft() {
         xPos -= MOVE_DIST;
     }
 
-    void moveRight() {
+    inline void moveRight() {
         xPos += MOVE_DIST;
     }
 
-    void jumpAction() {
+    inline void jumpAction() {
         yVel = JUMP_VEL;
         jump = true;
     }
 
-    void update(float delta) {
+    inline void update(float delta) {
         if (jump) {
             yPos += yVel * delta;
             yVel -= GRAVITY * delta;
@@ -62,16 +56,11 @@ public:
             }
         }
     }
-
-    void draw() {}
-
+    static constexpr float JUMP_VEL = 5.0f;
+    static constexpr float MOVE_DIST = 1.0f;
+    static constexpr float GRAVITY = 9.81f;
+    inline void draw() {}
 };
-
-const float Movement::JUMP_VEL = 5.0f;
-const float Movement::MOVE_DIST = 1.0f;
-const float Movement::GRAVITY = 9.81f;
-char Movement::keypress;
-
 
 
 #endif
