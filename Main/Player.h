@@ -1,3 +1,4 @@
+#pragma once
 #ifndef PLAYER_H
 #define PLAYER_H
 
@@ -10,40 +11,55 @@
 #include "Character.h"
 
 class Player : public Character {
-private:
-	Character* player = new Character;
-
 public:
-	Player(){ }
-	~Player() { delete player; }
+	Player() : Character() {}
 
-	void action() {
-		switch (QEvent::KeyPress)
-		{
-		case 'W':
-			// move up
-			break;
-		case 'A':
-			// move left
-			break;
-		case 'D':
-			// move right
-			break;
-		case 'J':
-			// jump
-			break;
-		case 'L':
-			// shoot
+	int kick() { return 20; }
+
+	int punch() {
+		if (rand() % 100 < 20) { // 20% chance of miss
+			return 0;
+		}
+		else {
+			return 40;
+		}
+	}
+
+	int special_attack() {
+		if (rand() % 100 < 40) { // 40% chance of hit
+			return 80;
+		}
+		else {
+			return 0;
+		}
+	}
+
+	void handleEvent(QEvent* event) {
+		switch (event->type()) {
+		case QEvent::KeyPress:
+			if (static_cast<QKeyEvent*>(event)->key() == Qt::Key_J) {
+				// btnPunch pressed
+				int damage = punch();
+				// do something with damage, like subtract it from enemy health
+			}
+			else if (static_cast<QKeyEvent*>(event)->key() == Qt::Key_K) {
+				// btnKick pressed
+				int damage = kick();
+				// do something with damage, like subtract it from enemy health
+			}
+			else if (static_cast<QKeyEvent*>(event)->key() == Qt::Key_L) {
+				// btnSpecial pressed
+				int damage = special_attack();
+				// do something with damage, like subtract it from enemy health
+			}
 			break;
 		default:
-			// do nothing for other keypresses
 			break;
 		}
 	}
 
-
 	bool isDead() {
-		if (player->hp <= 0) {
+		if (hp <= 0) {
 			std::cout << "You Died" << std::endl;
 			return true;
 		}

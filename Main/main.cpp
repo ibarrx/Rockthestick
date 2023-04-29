@@ -37,36 +37,21 @@ void stopFullBattleSound()
     }
 }
 
-void isWin(QOpenGLWidget* glWidget, QLabel* backgroundLabel)
+void isWin(QWidget* game, QLabel* backgroundLabel)
 {
-    Enemy win;
-    Player lose;
-
     QPixmap bkgnd("victoryroyale.png");
-    backgroundLabel->setPixmap(bkgnd);
-    backgroundLabel->setGeometry(0, 0, glWidget->width(), glWidget->height());
-    backgroundLabel->setScaledContents(true); // Set to stretch the background image
-    backgroundLabel->lower(); // Lower the background image to the bottom of the widget
 }
-
-void isLose(QOpenGLWidget* glWidget, QLabel* backgroundLabel)
+void isLose(QWidget* game, QLabel* backgroundLabel)
 {
-    Enemy win;
-    Player lose;
-
-
     QPixmap bkgnd("gameover.png");
-    backgroundLabel->setPixmap(bkgnd);
-    backgroundLabel->setGeometry(0, 0, glWidget->width(), glWidget->height());
-    backgroundLabel->setScaledContents(true); // Set to stretch the background image
-    backgroundLabel->lower(); // Lower the background image to the bottom of the widget
-    
 }
 
 
 //Main Function
 int main(int argc, char* argv[])
 {
+    Enemy win;
+    Character lose;
     // Initialize Qt application
     QApplication app(argc, argv);
     QIcon icon("Rock.ico");
@@ -170,8 +155,38 @@ int main(int argc, char* argv[])
     QWidget* centralWidget = new QWidget(mainWindow);
 
     // Add the QOpenGLWidget as a child widget to the central widget
-    QOpenGLWidget* glWidget = new QOpenGLWidget(centralWidget);
-    glWidget->setGeometry(0, 0, 816, 489); // Set widget geometry
+    QUiLoader load;
+    QFile file2("Game.ui");
+    file2.open(QIODevice::ReadOnly);
+    QWidget* game = load.load(&file2);
+    file2.close();
+    if (!game) {
+        qDebug() << "Failed to load UI file";
+        return;
+    }
+    QPushButton* btnPunch = game->findChild<QPushButton*>("btnPunch");
+    QPushButton* btnKick = game->findChild<QPushButton*>("btnKick");
+    QPushButton* btnSpecial = game->findChild<QPushButton*>("btnSpecial");
+
+
+    //QObject::connect(btnPunch, &QPushButton::clicked, [&player, &enemy]() {
+    //    int damage = player.punch();
+    //// do something with damage, like subtract it from enemy health
+    //    });
+
+    //QObject::connect(btnKick, &QPushButton::clicked, [&player, &enemy]() {
+    //    int damage = player.kick();
+    //// do something with damage, like subtract it from enemy health
+    //    });
+
+    //QObject::connect(btnSpecial, &QPushButton::clicked, [&player, &enemy]() {
+    //    int damage = player.special_attack();
+    //// do something with damage, like subtract it from enemy health
+    //    }, Qt::AutoConnection);
+
+
+    game->setParent(centralWidget);
+    game->setGeometry(0, 0, 816, 489); // Set widget geometry
 
     // Set the central widget of the main window
     mainWindow->setCentralWidget(centralWidget);
@@ -188,17 +203,16 @@ int main(int argc, char* argv[])
         return;
     }
 
-    QSize mainWindowSize = glWidget->size(); // Access size of mainWindow
+    QSize mainWindowSize = game->size(); // Access size of mainWindow
     bkgnd = bkgnd.scaled(mainWindowSize, Qt::IgnoreAspectRatio); // Scale background image to mainWindow size
 
     // Create a QLabel for displaying the background image
-    QLabel* backgroundLabel = new QLabel(glWidget);
+    QLabel* backgroundLabel = new QLabel(game);
 
     backgroundLabel->setPixmap(bkgnd);
-    backgroundLabel->setGeometry(0, 0, glWidget->width(), glWidget->height());
+    backgroundLabel->setGeometry(0, 0, game->width(), game->height());
     backgroundLabel->setScaledContents(true); // Set to stretch the background image
     backgroundLabel->lower(); // Lower the background image to the bottom of the widget
-
 
     // Center the main window on the screen
     QRect screenGeometry = QGuiApplication::primaryScreen()->geometry();
@@ -209,6 +223,9 @@ int main(int argc, char* argv[])
     mainWindow->setMaximumWidth(mainWindow->width());
     // Show the main window
     mainWindow->show();
+    game->show();
+    // ...
+
         });
 
     // Show the widget
