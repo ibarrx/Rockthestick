@@ -15,6 +15,8 @@
 #include <QUiLoader>
 #include <QFile>
 #include "qcheckbox.h"
+#include "qprogressbar.h"
+#include "qprogressdialog.h"
 #include "qstyle.h"
 #include "qpushbutton.h"
 #include "qboxlayout.h"

@@ -168,7 +168,7 @@ int main(int argc, char* argv[])
     QLabel* backgroundLabel = new QLabel(game);
     // Load and scale background image
 
-    QPixmap bkgnd("bg.png");
+    QPixmap bkgnd(":/new/prefix1/Scenes/Background_normal.png");
     if (bkgnd.isNull()) {
         qDebug() << "Error loading image file";
         return;
@@ -210,35 +210,37 @@ int main(int argc, char* argv[])
     QTimer gameLoopTimer;
     gameLoopTimer.setInterval(1000 / 60); // Set the interval to 60 times per second (approx. 16ms per frame)
     QObject::connect(&gameLoopTimer, &QTimer::timeout, [&]() {
-
         // Game loop
         QTimer animationTimer;
         animationTimer.setSingleShot(true);
         QObject::connect(&animationTimer, &QTimer::timeout, [&backgroundLabel]() {
             // Set the background to the default image after the animation duration has elapsed
-            backgroundLabel->setPixmap(QPixmap(":/new/prefix1/bg.png"));
+            backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_normal.png"));
             });
         bool playerTurn = true;
         while (true) {
             QPushButton* btnPunch = game->findChild<QPushButton*>("btnPunch");
             QPushButton* btnKick = game->findChild<QPushButton*>("btnKick");
             QPushButton* btnSpecial = game->findChild<QPushButton*>("btnSpecial");
+            QProgressBar* playerHealth = game->findChild<QProgressBar*>("playerHealth");
+            QProgressBar* enemyHealth = game->findChild<QProgressBar*>("enemyHealth");
 
             // Handle events (e.g., button clicks, key presses)
             if (playerTurn) {
-                QObject::connect(btnPunch, &QPushButton::clicked, [&player, &enemy, &backgroundLabel, &animationTimer]() {
-                    // Show the punch animation for 3 seconds
-                backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_punch.png"));
-                animationTimer.start(3000);
-
+                QObject::connect(btnPunch, &QPushButton::clicked, [&player, &enemy, &backgroundLabel, &animationTimer, playerHealth]() {
                 // Deal damage to the enemy
                 int damage = player.punch();
-                // do something with damage, like subtract it from enemy health
+                playerHealth->setValue(player.hp);
+                // Show the punch animation for 3 seconds
+                backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_punch.png"));
+                animationTimer.start(3000);
                     });
 
-                QObject::connect(btnKick, &QPushButton::clicked, [&player, &enemy, &backgroundLabel, &animationTimer]() {
+                QObject::connect(btnKick, &QPushButton::clicked, [&player, &enemy, &backgroundLabel, &animationTimer, playerHealth]() {
                     // Show the kick animation for 3 seconds
                     int damage = player.kick();
+                    playerHealth->setValue(player.hp);
+
                 if (damage == 0)
                 {
                     backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_kick_block.png"));
@@ -251,9 +253,11 @@ int main(int argc, char* argv[])
                 }
                     });
 
-                QObject::connect(btnSpecial, &QPushButton::clicked, [&player, &enemy, &backgroundLabel, &animationTimer]() {
+                QObject::connect(btnSpecial, &QPushButton::clicked, [&player, &enemy, &backgroundLabel, &animationTimer, playerHealth]() {
                     // Deal damage to the enemy
                     int damage = player.special_attack();
+                    playerHealth->setValue(player.hp);
+
                 if (damage == 0)
                 {
                     backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_super_block.png"));
@@ -329,11 +333,11 @@ int main(int argc, char* argv[])
         }
 
     });
-    gameLoopTimer.start();
     // Show the main window
     mainWindow->show();
     game->show();
     // ...
+    gameLoopTimer.start();
         });
 
     // Show the widget
