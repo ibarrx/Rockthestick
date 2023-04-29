@@ -1,2 +1,2 @@
 # Rockthestick
-Video game for our CSE155 project
+Video game for our CSE165 project
