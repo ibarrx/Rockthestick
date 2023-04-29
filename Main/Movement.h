@@ -6,9 +6,19 @@
 #include <stdlib.h>
 #include <qmainwindow.h>
 #include "qopenglwidget.h"
+#include "qobject.h"
+#include <QKeyEvent> // Add this line
 
-class Movement {
+class Movement :public QObject {
+    Q_OBJECT
+
+public slots:
+    void handleKeyPress(QKeyEvent* event);
+
+
 public:
+
+
     Movement() {}
     ~Movement() {}
 
@@ -31,6 +41,8 @@ public:
             keypress = 'D';
         }
     }
+
+
 
     inline void moveLeft() {
         xPos -= MOVE_DIST;

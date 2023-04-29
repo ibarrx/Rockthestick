@@ -103,7 +103,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Movement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="menu.ui" />
@@ -112,7 +114,8 @@
   <ItemGroup>
     <QtMoc Include="Character.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Movement.h" />
+    <QtMoc Include="Movement.h" />
+    <QtMoc Include="GameEngine.h" />
     <ClInclude Include="Includes.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="QTOpenGLH.h" />

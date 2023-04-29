@@ -42,20 +42,7 @@ class MyOpenGLWidget : public QOpenGLWidget {
 public:
     MyOpenGLWidget(QWidget* parent = nullptr) : QOpenGLWidget(parent) {}
     void keyPressEvent(QKeyEvent* event) override {
-        switch (event->key()) {
-        case Qt::Key_W:
-            // Handle 'W' key press event
-            break;
-        case Qt::Key_A:
-            // Handle 'A' key press event
-            break;
-        case Qt::Key_D:
-            // Handle 'D' key press event
-            break;
-        default:
-            QOpenGLWidget::keyPressEvent(event);
-            break;
-        }
+        emit keyPressed(event);
     }
 
 signals: // add this block
