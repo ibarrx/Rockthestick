@@ -26,12 +26,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Movement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="Widget.ui">
@@ -40,11 +34,11 @@
     <QtUic Include="menu.ui">
       <Filter>Source Files</Filter>
     </QtUic>
+    <QtUic Include="Game.ui">
+      <Filter>Source Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -54,10 +48,13 @@
     <ClInclude Include="Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="QTOpenGLH.h">
+    <ClInclude Include="attacks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="attacks.h">
+    <ClInclude Include="Character.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -65,16 +62,5 @@
     <QtRcc Include="resources.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="Character.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Movement.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="GameEngine.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
   </ItemGroup>
 </Project>

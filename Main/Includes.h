@@ -5,12 +5,8 @@
 #include <wmp.h>
 #include <tlhelp32.h>
 #include "Movement.h"
-#include "Player.h"
 #include "Enemy.h"
-#include "QTOpenGLH.h"
-#include "GameEngine.h"
-//#define STB_IMAGE_IMPLEMENTATION
-//#include <stb/stb_image.h>
+#include "Player.h"
 #include <QApplication>
 #include <QMainWindow>
 #include <QIcon>

@@ -1,9 +1,4 @@
 ﻿  Reading Qt configuration (C:/Qt/6.5.0/msvc2019_64/bin/qmake)
-  GameEngine.cpp
   main.cpp
-  Movement.cpp
   qrc_resources.cpp
-  moc_Character.cpp
-  moc_Movement.cpp
-  moc_GameEngine.cpp
   Main.vcxproj -> C:\Users\Angel\source\repos\RockTheStick\x64\Debug\Main.exe
