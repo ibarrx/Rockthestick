@@ -18,7 +18,7 @@ public:
 	~Player() { delete player; }
 
 	void action() {
-		switch (Movement::keypress)
+		switch (QEvent::KeyPress)
 		{
 		case 'W':
 			// move up

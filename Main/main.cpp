@@ -4,43 +4,6 @@
 bool menuSoundPlaying = false;
 bool fullBattleSoundPlaying = false;
 
-//Classes
-class MainWindow : public QMainWindow {
-public:
-    MainWindow() {
-        // Set the GLFW key callback function with a pointer to this instance
-        glfwSetWindowUserPointer(glfwGetCurrentContext(), this);
-        glfwSetKeyCallback(glfwGetCurrentContext(), key_callback);
-    }
-
-    void update() {
-        // Update the movement
-        movement.update(0.16f); // Pass the delta time between frames
-
-        // Redraw the scene
-        movement.draw();
-    }
-
-private:
-    Movement movement;
-
-    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-        // Cast the user pointer back to a MainWindow pointer
-        MainWindow* mainWindow = static_cast<MainWindow*>(glfwGetWindowUserPointer(window));
-
-        // Access the movement variable relative to the MainWindow instance
-        if (key == GLFW_KEY_W && action == GLFW_PRESS) {
-            mainWindow->movement.key_cb(window, 'w', GLFW_PRESS);
-        }
-        if (key == GLFW_KEY_A && action == GLFW_PRESS) {
-            mainWindow->movement.key_cb(window, 'a', GLFW_PRESS);
-        }
-        if (key == GLFW_KEY_D && action == GLFW_PRESS) {
-            mainWindow->movement.key_cb(window, 'd', GLFW_PRESS);
-        }
-    }
-};
-
 //Functions
 void soundPlay()
 {
@@ -72,6 +35,32 @@ void stopFullBattleSound()
         PlaySound(NULL, NULL, 0);
         fullBattleSoundPlaying = false;
     }
+}
+
+void isWin(QOpenGLWidget* glWidget, QLabel* backgroundLabel)
+{
+    Enemy win;
+    Player lose;
+
+    QPixmap bkgnd("victoryroyale.png");
+    backgroundLabel->setPixmap(bkgnd);
+    backgroundLabel->setGeometry(0, 0, glWidget->width(), glWidget->height());
+    backgroundLabel->setScaledContents(true); // Set to stretch the background image
+    backgroundLabel->lower(); // Lower the background image to the bottom of the widget
+}
+
+void isLose(QOpenGLWidget* glWidget, QLabel* backgroundLabel)
+{
+    Enemy win;
+    Player lose;
+
+
+    QPixmap bkgnd("gameover.png");
+    backgroundLabel->setPixmap(bkgnd);
+    backgroundLabel->setGeometry(0, 0, glWidget->width(), glWidget->height());
+    backgroundLabel->setScaledContents(true); // Set to stretch the background image
+    backgroundLabel->lower(); // Lower the background image to the bottom of the widget
+    
 }
 
 
@@ -140,6 +129,7 @@ int main(int argc, char* argv[])
         stopMenuSound();
     }
 
+
     // Load the UI file
     QUiLoader loader1;
     QFile file1("Widget.ui");
@@ -173,30 +163,42 @@ int main(int argc, char* argv[])
     // Close the widget
     widget->close();
 
-    // Create main window
+   // Create main window
     QMainWindow* mainWindow = new QMainWindow();
+
+    // Create a new QWidget to use as the central widget
+    QWidget* centralWidget = new QWidget(mainWindow);
+
+    // Add the QOpenGLWidget as a child widget to the central widget
+    QOpenGLWidget* glWidget = new QOpenGLWidget(centralWidget);
+    glWidget->setGeometry(0, 0, 816, 489); // Set widget geometry
+
+    // Set the central widget of the main window
+    mainWindow->setCentralWidget(centralWidget);
+
+    // Set window properties
     mainWindow->setWindowTitle("RockTheStick");
     mainWindow->setGeometry(100, 100, 816, 489); // Set window geometry
-    QMainWindow window;
-
-    // Set window icon
     mainWindow->setWindowIcon(icon);
-
     // Load and scale background image
+
     QPixmap bkgnd("bg.png");
     if (bkgnd.isNull()) {
         qDebug() << "Error loading image file";
         return;
     }
-    QSize mainWindowSize = mainWindow->size(); // Access size of mainWindow
+
+    QSize mainWindowSize = glWidget->size(); // Access size of mainWindow
     bkgnd = bkgnd.scaled(mainWindowSize, Qt::IgnoreAspectRatio); // Scale background image to mainWindow size
 
     // Create a QLabel for displaying the background image
-    QLabel* backgroundLabel = new QLabel(mainWindow);
+    QLabel* backgroundLabel = new QLabel(glWidget);
+
     backgroundLabel->setPixmap(bkgnd);
-    backgroundLabel->setGeometry(0, 0, mainWindow->width(), mainWindow->height());
+    backgroundLabel->setGeometry(0, 0, glWidget->width(), glWidget->height());
     backgroundLabel->setScaledContents(true); // Set to stretch the background image
     backgroundLabel->lower(); // Lower the background image to the bottom of the widget
+
 
     // Center the main window on the screen
     QRect screenGeometry = QGuiApplication::primaryScreen()->geometry();
@@ -206,33 +208,20 @@ int main(int argc, char* argv[])
     mainWindow->setMaximumHeight(mainWindow->height());
     mainWindow->setMaximumWidth(mainWindow->width());
     // Show the main window
-    window.show();
     mainWindow->show();
-    GLWidget* glWidget = new GLWidget();
-    window.setCentralWidget(glWidget);
-
-
         });
 
     // Show the widget
     widget->show();
+
         });
 
     // Show the menu
     menu->show();
+
     // Run the event loop
     return app.exec();
 
-    Enemy win;
-    Player lose;
-
-    if (win.isDead() == true)
-    {
-        // shows the win screen
-    }
-
-    else if (lose.isDead() == true)
-    {
-        // shows the game over screen
-    }
+    delete menu;
+   
 }
