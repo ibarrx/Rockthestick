@@ -6,6 +6,7 @@
 #include <tlhelp32.h>
 #include "Movement.h"
 #include "Enemy.h"
+#include "Player.h"
 #include <QApplication>
 #include <QMainWindow>
 #include <QIcon>

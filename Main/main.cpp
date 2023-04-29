@@ -50,8 +50,7 @@ void isLose(QWidget* game, QLabel* backgroundLabel)
 //Main Function
 int main(int argc, char* argv[])
 {
-    Enemy win;
-    Character lose;
+
     // Initialize Qt application
     QApplication app(argc, argv);
     QIcon icon("Rock.ico");
@@ -112,6 +111,7 @@ int main(int argc, char* argv[])
     {
         menu->close();
         stopMenuSound();
+
     }
 
 
@@ -140,13 +140,13 @@ int main(int argc, char* argv[])
         else {
             qDebug() << "Is Training checkbox is not checked";
         }
-
     if (isAudio && isAudio->isChecked()) {
         soundPlay();
     }
 
     // Close the widget
     widget->close();
+    delete widget;
 
    // Create main window
     QMainWindow* mainWindow = new QMainWindow();
@@ -164,26 +164,22 @@ int main(int argc, char* argv[])
         qDebug() << "Failed to load UI file";
         return;
     }
-    QPushButton* btnPunch = game->findChild<QPushButton*>("btnPunch");
-    QPushButton* btnKick = game->findChild<QPushButton*>("btnKick");
-    QPushButton* btnSpecial = game->findChild<QPushButton*>("btnSpecial");
+    // Create a QLabel for displaying the background image
+    QLabel* backgroundLabel = new QLabel(game);
+    // Load and scale background image
 
-
-    //QObject::connect(btnPunch, &QPushButton::clicked, [&player, &enemy]() {
-    //    int damage = player.punch();
-    //// do something with damage, like subtract it from enemy health
-    //    });
-
-    //QObject::connect(btnKick, &QPushButton::clicked, [&player, &enemy]() {
-    //    int damage = player.kick();
-    //// do something with damage, like subtract it from enemy health
-    //    });
-
-    //QObject::connect(btnSpecial, &QPushButton::clicked, [&player, &enemy]() {
-    //    int damage = player.special_attack();
-    //// do something with damage, like subtract it from enemy health
-    //    }, Qt::AutoConnection);
-
+    QPixmap bkgnd("bg.png");
+    if (bkgnd.isNull()) {
+        qDebug() << "Error loading image file";
+        return;
+    }
+    backgroundLabel->setPixmap(bkgnd);
+    backgroundLabel->setGeometry(0, 0, game->width(), game->height());
+    backgroundLabel->setScaledContents(true); // Set to stretch the background image
+    backgroundLabel->lower(); // Lower the background image to the bottom of the widget
+    Enemy enemy;
+    Character lose;
+    Player player;
 
     game->setParent(centralWidget);
     game->setGeometry(0, 0, 816, 489); // Set widget geometry
@@ -195,24 +191,11 @@ int main(int argc, char* argv[])
     mainWindow->setWindowTitle("RockTheStick");
     mainWindow->setGeometry(100, 100, 816, 489); // Set window geometry
     mainWindow->setWindowIcon(icon);
-    // Load and scale background image
 
-    QPixmap bkgnd("bg.png");
-    if (bkgnd.isNull()) {
-        qDebug() << "Error loading image file";
-        return;
-    }
 
     QSize mainWindowSize = game->size(); // Access size of mainWindow
     bkgnd = bkgnd.scaled(mainWindowSize, Qt::IgnoreAspectRatio); // Scale background image to mainWindow size
 
-    // Create a QLabel for displaying the background image
-    QLabel* backgroundLabel = new QLabel(game);
-
-    backgroundLabel->setPixmap(bkgnd);
-    backgroundLabel->setGeometry(0, 0, game->width(), game->height());
-    backgroundLabel->setScaledContents(true); // Set to stretch the background image
-    backgroundLabel->lower(); // Lower the background image to the bottom of the widget
 
     // Center the main window on the screen
     QRect screenGeometry = QGuiApplication::primaryScreen()->geometry();
@@ -221,11 +204,136 @@ int main(int argc, char* argv[])
     mainWindow->move(x, y);
     mainWindow->setMaximumHeight(mainWindow->height());
     mainWindow->setMaximumWidth(mainWindow->width());
+
+    enum class GameState { PlayerTurn, EnemyTurn, GameOver };
+    GameState currentState = GameState::PlayerTurn;
+    QTimer gameLoopTimer;
+    gameLoopTimer.setInterval(1000 / 60); // Set the interval to 60 times per second (approx. 16ms per frame)
+    QObject::connect(&gameLoopTimer, &QTimer::timeout, [&]() {
+
+        // Game loop
+        QTimer animationTimer;
+        animationTimer.setSingleShot(true);
+        QObject::connect(&animationTimer, &QTimer::timeout, [&backgroundLabel]() {
+            // Set the background to the default image after the animation duration has elapsed
+            backgroundLabel->setPixmap(QPixmap(":/new/prefix1/bg.png"));
+            });
+        bool playerTurn = true;
+        while (true) {
+            QPushButton* btnPunch = game->findChild<QPushButton*>("btnPunch");
+            QPushButton* btnKick = game->findChild<QPushButton*>("btnKick");
+            QPushButton* btnSpecial = game->findChild<QPushButton*>("btnSpecial");
+
+            // Handle events (e.g., button clicks, key presses)
+            if (playerTurn) {
+                QObject::connect(btnPunch, &QPushButton::clicked, [&player, &enemy, &backgroundLabel, &animationTimer]() {
+                    // Show the punch animation for 3 seconds
+                backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_punch.png"));
+                animationTimer.start(3000);
+
+                // Deal damage to the enemy
+                int damage = player.punch();
+                // do something with damage, like subtract it from enemy health
+                    });
+
+                QObject::connect(btnKick, &QPushButton::clicked, [&player, &enemy, &backgroundLabel, &animationTimer]() {
+                    // Show the kick animation for 3 seconds
+                    int damage = player.kick();
+                if (damage == 0)
+                {
+                    backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_kick_block.png"));
+                    animationTimer.start(3000);
+                }
+                else
+                {
+                    backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_kick.png"));
+                    animationTimer.start(3000);
+                }
+                    });
+
+                QObject::connect(btnSpecial, &QPushButton::clicked, [&player, &enemy, &backgroundLabel, &animationTimer]() {
+                    // Deal damage to the enemy
+                    int damage = player.special_attack();
+                if (damage == 0)
+                {
+                    backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_super_block.png"));
+                    animationTimer.start(3000);
+                }
+                else
+                {
+                    backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_super.png"));
+                    animationTimer.start(3000);
+                }
+                    });
+
+                // Check if the game is over
+                if (player.isDead()) {
+                    isLose(game, backgroundLabel);
+                    break;
+                }
+
+                playerTurn = false;
+            }
+            else {
+                // Enemy's turn
+                // Disable the buttons for the player's moves
+
+                // Enemy makes a move
+                enemy.randmove();
+                int damage = 0; // Placeholder for the damage dealt by the enemy's move
+                int moveType = rand() % 3; // Randomly choose the type of move (0 = punch, 1 = kick, 2 = special attack)
+                switch (moveType) {
+                case 0:
+                    damage = enemy.punch();
+                    backgroundLabel->setPixmap(QPixmap(":/images/punch_animation.png"));
+                    animationTimer.start(3000);
+                    break;
+                case 1:
+                    damage = enemy.kick();
+                    if (damage == 0)
+                    {
+                        backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_e_kick_block.png"));
+                        animationTimer.start(3000);
+                    }
+                    else
+                    {
+                        backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_e_kick.png"));
+                        animationTimer.start(3000);
+                    }
+                    break;
+                case 2:
+                    damage = enemy.special_attack();
+                    if (damage == 0)
+                    {
+                        backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_e_super.png"));
+                        animationTimer.start(3000);
+                    }
+                    else
+                    {
+                        backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_e_super.png"));
+                        animationTimer.start(3000);
+                    }
+                    break;
+                default:
+                    break;
+                }
+                // do something with damage, like subtract it from player health
+
+                // Check if the game is over
+                if (enemy.isDead()) {
+                    isWin(game, backgroundLabel);
+                    break;
+                }
+                playerTurn = true;
+            }
+        }
+
+    });
+    gameLoopTimer.start();
     // Show the main window
     mainWindow->show();
     game->show();
     // ...
-
         });
 
     // Show the widget
