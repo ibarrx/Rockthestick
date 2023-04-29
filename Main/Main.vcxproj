@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Character.h" />
+    <ClInclude Include="attacks.h" />
     <ClInclude Include="Enemy.h" />
     <QtMoc Include="Movement.h" />
     <QtMoc Include="GameEngine.h" />
