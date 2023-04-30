@@ -113,40 +113,9 @@ int main(int argc, char* argv[])
         stopMenuSound();
 
     }
-
-
-    // Load the UI file
-    QUiLoader loader1;
-    QFile file1("Widget.ui");
-    file1.open(QIODevice::ReadOnly);
-    QWidget* widget = loader1.load(&file1);
-    file1.close();
-    if (!widget) {
-        qDebug() << "Failed to load UI file";
-        return;
-    }
-    widget->setWindowIcon(icon);
-    widget->setWindowTitle("RockTheStick");
-
-    // Find the isTraining checkbox and btnGo button by name
-    QCheckBox* checkbox = widget->findChild<QCheckBox*>("isTraining");
-    QPushButton* button = widget->findChild<QPushButton*>("btnGo");
-
-    // Connect button click event to slot
-    QObject::connect(button, &QPushButton::clicked, [widget, checkbox, isAudio, &app, icon]() {
-        if (checkbox && checkbox->isChecked()) {
-            qDebug() << "Is Training checkbox is checked";
-        }
-        else {
-            qDebug() << "Is Training checkbox is not checked";
-        }
     if (isAudio && isAudio->isChecked()) {
         soundPlay();
     }
-
-    // Close the widget
-    widget->close();
-    delete widget;
 
    // Create main window
     QMainWindow* mainWindow = new QMainWindow();
@@ -157,7 +126,7 @@ int main(int argc, char* argv[])
     // Add the QOpenGLWidget as a child widget to the central widget
     QUiLoader load;
     QFile file2("Game.ui");
-    file2.open(QIODevice::ReadOnly);
+    file2.open(QIODevice::ReadWrite);
     QWidget* game = load.load(&file2);
     file2.close();
     if (!game) {
@@ -209,7 +178,6 @@ int main(int argc, char* argv[])
     GameState currentState = GameState::PlayerTurn;
     QTimer gameLoopTimer;
     gameLoopTimer.setInterval(1000 / 60); // Set the interval to 60 times per second (approx. 16ms per frame)
-    QObject::connect(&gameLoopTimer, &QTimer::timeout, [&]() {
         // Game loop
         QTimer animationTimer;
         animationTimer.setSingleShot(true);
@@ -218,7 +186,6 @@ int main(int argc, char* argv[])
             backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_normal.png"));
             });
         bool playerTurn = true;
-        while (true) {
             QPushButton* btnPunch = game->findChild<QPushButton*>("btnPunch");
             QPushButton* btnKick = game->findChild<QPushButton*>("btnKick");
             QPushButton* btnSpecial = game->findChild<QPushButton*>("btnSpecial");
@@ -273,7 +240,6 @@ int main(int argc, char* argv[])
                 // Check if the game is over
                 if (player.isDead()) {
                     isLose(game, backgroundLabel);
-                    break;
                 }
 
                 playerTurn = false;
@@ -326,23 +292,16 @@ int main(int argc, char* argv[])
                 // Check if the game is over
                 if (enemy.isDead()) {
                     isWin(game, backgroundLabel);
-                    break;
                 }
                 playerTurn = true;
             }
-        }
 
-    });
+  
     // Show the main window
     mainWindow->show();
     game->show();
     // ...
     gameLoopTimer.start();
-        });
-
-    // Show the widget
-    widget->show();
-
         });
 
     // Show the menu
