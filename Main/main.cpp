@@ -135,9 +135,7 @@ int main(int argc, char* argv[])
         return;
     }
     // Initialize game objects
-    Enemy enemy;
-    Character lose;
-    Player player;
+
     // Create a QLabel for displaying the background image
     QLabel* backgroundLabel = new QLabel(game);
     // Load and scale background image
@@ -195,16 +193,24 @@ int main(int argc, char* argv[])
             QPushButton* btnSpecial = game->findChild<QPushButton*>("btnSpecial");
             QProgressBar* playerHealth = game->findChild<QProgressBar*>("playerHealth");
             QProgressBar* enemyHealth = game->findChild<QProgressBar*>("enemyHealth");
+            Enemy enemy;
+            Character lose;
+            Player player;
+
+            player.hp = 100;
+            enemy.hp = 100;
 
             // Handle events (e.g., button clicks, key presses)
             if (playerTurn) {
-                QObject::connect(btnPunch, &QPushButton::clicked, [&player, &enemy, &backgroundLabel, &animationTimer, playerHealth]() {
+                QObject::connect(btnPunch, &QPushButton::clicked, [&player, &enemy, backgroundLabel,&animationTimer, enemyHealth]() {
                 // Deal damage to the enemy
                 int damage = player.punch();
-                int* hpPoint = &player.hp;
-                playerHealth->setValue(*hpPoint);
+                enemy.hp = enemy.hp - damage;
+                enemyHealth->setValue(enemy.hp);
                 // Show the punch animation for 3 seconds
-                //backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_punch.png"));
+                delete[] backgroundLabel;
+                QPixmap bkgnd(":/new/prefix1/Scenes/Background_punch.png");
+                backgroundLabel->setPixmap(bkgnd);
                 //animationTimer.start(3000);
                     });
 

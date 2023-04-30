@@ -28,4 +28,8 @@
 #include <thread>
 #include <vector>
 #include "qtimer.h"
+#include "qgraphicsscene.h"
+#include "qpixmap"
+#include "qglobal.h"
+#include "qobject.h"
 #pragma once
