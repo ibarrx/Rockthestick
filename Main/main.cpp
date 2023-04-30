@@ -46,6 +46,73 @@ void isLose(QWidget* game, QLabel* backgroundLabel)
     QPixmap bkgnd("gameover.png");
 }
 
+void punchClick(QProgressBar* enemyHealth, QLabel* backgroundLabel)
+{
+    Player player;
+    Enemy enemy;
+    // Deal damage to the enemy
+    int damage = player.punch();
+    enemy.hp = enemy.hp - damage;
+    // Show the punch animation for 3 seconds
+    //delete[] backgroundLabel;
+    QPixmap bkgnd(":/new/prefix1/Scenes/Background_punch.png");
+    backgroundLabel->setPixmap(bkgnd);
+    enemyHealth->setValue(enemy.hp);
+    //animationTimer.start(3000);
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    QPixmap bkgnd2(":/new/prefix1/Scenes/Background_normal.png");
+    backgroundLabel->setPixmap(bkgnd2);
+}
+
+void kickClick(QProgressBar* enemyHealth, QLabel* backgroundLabel)
+{
+    Player player;
+    Enemy enemy;
+    // Show the kick animation for 3 seconds
+    int damage = player.kick();
+    enemyHealth->setValue(player.hp);
+
+    if (damage == 0)
+    {
+        QPixmap bkgnd(":/new/prefix1/Scenes/Background_kick_block.png");
+        backgroundLabel->setPixmap(bkgnd);
+        std::this_thread::sleep_for(std::chrono::seconds(2));
+    }
+    else
+    {
+        QPixmap bkgnd(":/new/prefix1/Scenes/Background_kick.png");
+        backgroundLabel->setPixmap(bkgnd);
+        std::this_thread::sleep_for(std::chrono::seconds(2));
+    }
+    
+    QPixmap bkgnd2(":/new/prefix1/Scenes/Background_normal.png");
+    backgroundLabel->setPixmap(bkgnd2);
+}
+
+void specialClick(QProgressBar* enemyHealth, QLabel* backgroundLabel)
+{
+    Player player;
+    Enemy enemy;
+    // Deal damage to the enemy
+    int damage = player.special_attack();
+    enemyHealth->setValue(player.hp);
+
+    if (damage == 0)
+    {
+        QPixmap bkgnd(":/new/prefix1/Scenes/Background_super_block.png");
+        backgroundLabel->setPixmap(bkgnd);
+        std::this_thread::sleep_for(std::chrono::seconds(2));
+    }
+    else
+    {
+        QPixmap bkgnd(":/new/prefix1/Scenes/Background_super.png");
+        std::this_thread::sleep_for(std::chrono::seconds(2));
+    }
+    QPixmap bkgnd2(":/new/prefix1/Scenes/Background_normal.png");
+    backgroundLabel->setPixmap(bkgnd2);
+}
+
+
 
 //Main Function
 int main(int argc, char* argv[])
@@ -200,52 +267,22 @@ int main(int argc, char* argv[])
             player.hp = 100;
             enemy.hp = 100;
 
+
+
             // Handle events (e.g., button clicks, key presses)
             if (playerTurn) {
-                QObject::connect(btnPunch, &QPushButton::clicked, [&player, &enemy, backgroundLabel,&animationTimer, enemyHealth]() {
-                // Deal damage to the enemy
-                int damage = player.punch();
-                enemy.hp = enemy.hp - damage;
-                enemyHealth->setValue(enemy.hp);
-                // Show the punch animation for 3 seconds
-                delete[] backgroundLabel;
-                QPixmap bkgnd(":/new/prefix1/Scenes/Background_punch.png");
-                backgroundLabel->setPixmap(bkgnd);
-                //animationTimer.start(3000);
+                QObject::connect(btnPunch, &QPushButton::clicked, [&player, &enemy, backgroundLabel, enemyHealth]() {
+
+                    punchClick(enemyHealth, backgroundLabel);
                     });
 
-                QObject::connect(btnKick, &QPushButton::clicked, [&player, &enemy, &backgroundLabel, &animationTimer, playerHealth]() {
-                    // Show the kick animation for 3 seconds
-                    int damage = player.kick();
-                    playerHealth->setValue(player.hp);
+                QObject::connect(btnKick, &QPushButton::clicked, [&player, &enemy, backgroundLabel, enemyHealth]() {
+                    kickClick(enemyHealth, backgroundLabel);
 
-                if (damage == 0)
-                {
-                    backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_kick_block.png"));
-                    animationTimer.start(3000);
-                }
-                else
-                {
-                    backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_kick.png"));
-                    animationTimer.start(3000);
-                }
                     });
 
-                QObject::connect(btnSpecial, &QPushButton::clicked, [&player, &enemy, &backgroundLabel, &animationTimer, playerHealth]() {
-                    // Deal damage to the enemy
-                    int damage = player.special_attack();
-                    playerHealth->setValue(player.hp);
-
-                if (damage == 0)
-                {
-                    backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_super_block.png"));
-                    animationTimer.start(3000);
-                }
-                else
-                {
-                    backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_super.png"));
-                    animationTimer.start(3000);
-                }
+                QObject::connect(btnSpecial, &QPushButton::clicked, [&player, &enemy, backgroundLabel, enemyHealth]() {
+                    specialClick(enemyHealth, backgroundLabel);
                     });
 
                 // Check if the game is over

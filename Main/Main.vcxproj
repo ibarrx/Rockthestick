@@ -112,7 +112,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
-    <ClInclude Include="attacks.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Includes.h" />
     <ClInclude Include="Player.h" />
