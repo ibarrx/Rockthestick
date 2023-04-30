@@ -27,9 +27,9 @@ public:
         // set up player-specific attributes here
     }
 
-    int kick() { return 20; }
+    int punch() { return 20; }
 
-    int punch() {
+    int kick() {
         if (rand() % 100 < 20) { // 20% chance of miss
             return 0;
         }

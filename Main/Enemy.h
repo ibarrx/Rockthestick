@@ -1,7 +1,6 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include <GLFW/glfw3.h>
 #include <iostream>
 #include <fstream>
 #include <time.h>
