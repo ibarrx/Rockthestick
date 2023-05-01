@@ -4,6 +4,9 @@
 #include <string>
 #include "qevent.h"
 
+int healthPlayer = 100;
+int healthEnemy = 100;
+
 class Character {
 public:
     int hp;

@@ -32,4 +32,6 @@
 #include "qpixmap"
 #include "qglobal.h"
 #include "qobject.h"
+#include "qmediaplayer.h"
+#include <mmsystem.h>
 #pragma once

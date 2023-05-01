@@ -3,22 +3,22 @@
 //Modular Variables
 bool menuSoundPlaying = false;
 bool fullBattleSoundPlaying = false;
-int healthPlayer = 100;
-int healthEnemy = 100;
 
 //Functions
+std::thread soundThread;
+
 void soundPlay()
 {
     fullBattleSoundPlaying = true;
-    bool played = PlaySound(_T("sounds/fullBattleTheme.wav"), NULL, SND_LOOP | SND_ASYNC);
-    std::cout << played << std::endl;
+    soundThread = std::thread([]() {
+        PlaySound(_T("sounds/fullBattleTheme.wav"), NULL, SND_LOOP | SND_ASYNC);
+        });
 }
 
 void menuSoundPlay()
 {
     menuSoundPlaying = true;
-    bool played = PlaySound(_T("sounds/MenuLoopable.wav"), NULL, SND_LOOP | SND_ASYNC);
-    std::cout << played << std::endl;
+    PlaySound(_T("sounds/MenuLoopable.wav"), NULL, SND_LOOP | SND_ASYNC);
 }
 
 void stopMenuSound()
@@ -35,22 +35,28 @@ void stopFullBattleSound()
     if (fullBattleSoundPlaying)
     {
         PlaySound(NULL, NULL, 0);
+        soundThread.join();
         fullBattleSoundPlaying = false;
     }
 }
 
-void isWin(QWidget* game, QLabel* backgroundLabel,QPushButton* btnKick, QPushButton* btnPunch, QPushButton* btnSpecial)
+
+void isWin(QWidget* game, QLabel* backgroundLabel,QPushButton* btnKick, QPushButton* btnPunch, QPushButton* btnSpecial,QProgressBar* enemyHealth)
 {
+    enemyHealth->setValue(0);
     QPixmap bkgnd(":/new/prefix1/victoryroyale.png");
     backgroundLabel->setPixmap(bkgnd);
+    backgroundLabel->repaint();
     btnKick->setEnabled(false);
     btnPunch->setEnabled(false);
     btnSpecial->setEnabled(false);
 }
-void isLose(QWidget* game, QLabel* backgroundLabel, QPushButton* btnKick, QPushButton* btnPunch, QPushButton* btnSpecial)
+void isLose(QWidget* game, QLabel* backgroundLabel, QPushButton* btnKick, QPushButton* btnPunch, QPushButton* btnSpecial, QProgressBar* playerHealth)
 {
+    playerHealth->setValue(0);
     QPixmap bkgnd(":/new/prefix1/gameover.png");
     backgroundLabel->setPixmap(bkgnd);
+    backgroundLabel->repaint();
     btnKick->setEnabled(false);
     btnPunch->setEnabled(false);
     btnSpecial->setEnabled(false);
@@ -68,12 +74,9 @@ void punchClick(QProgressBar* enemyHealth, QLabel* backgroundLabel)
     // Show the punch animation for 2 seconds
     QPixmap bkgnd(":/new/prefix1/Scenes/Background_punch.png");
     backgroundLabel->setPixmap(bkgnd);
+    backgroundLabel->repaint();
     enemyHealth->setValue(enemy.hp);
-    //sleep for 2 seconds
-    std::this_thread::sleep_for(std::chrono::seconds(2));
-    //set to normal
-    QPixmap bkgnd2(":/new/prefix1/Scenes/Background_normal.png");
-    backgroundLabel->setPixmap(bkgnd2);
+    std::this_thread::sleep_for(std::chrono::seconds(1));
 }
 
 void kickClick(QProgressBar* enemyHealth, QLabel* backgroundLabel)
@@ -87,21 +90,21 @@ void kickClick(QProgressBar* enemyHealth, QLabel* backgroundLabel)
 
     if (damage <= 0)
     {
-        QPixmap bkgnd3(":/new/prefix1/Scenes/Background_kick_block.png");
-        backgroundLabel->setPixmap(bkgnd3);
+        QPixmap bkgnd(":/new/prefix1/Scenes/Background_kick_block.png");
+        backgroundLabel->setPixmap(bkgnd);
+        backgroundLabel->repaint();
         enemyHealth->setValue(enemy.hp);
-        std::this_thread::sleep_for(std::chrono::seconds(2));
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
     else
     {
-        QPixmap bkgnd2(":/new/prefix1/Scenes/Background_kick.png");
-        backgroundLabel->setPixmap(bkgnd2);
+        QPixmap bkgnd(":/new/prefix1/Scenes/Background_kick.png");
+        backgroundLabel->setPixmap(bkgnd);
+        backgroundLabel->repaint();
         enemyHealth->setValue(enemy.hp);
-        std::this_thread::sleep_for(std::chrono::seconds(2));
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
-    
-    QPixmap bkgnd2(":/new/prefix1/Scenes/Background_normal.png");
-    backgroundLabel->setPixmap(bkgnd2);
+ 
 }
 
 void specialClick(QProgressBar* enemyHealth, QLabel* backgroundLabel)
@@ -117,18 +120,18 @@ void specialClick(QProgressBar* enemyHealth, QLabel* backgroundLabel)
     {
         QPixmap bkgnd(":/new/prefix1/Scenes/Background_super_block.png");
         backgroundLabel->setPixmap(bkgnd);
+        backgroundLabel->repaint();
         enemyHealth->setValue(enemy.hp);
-        std::this_thread::sleep_for(std::chrono::seconds(2));
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
     else
     {
         QPixmap bkgnd(":/new/prefix1/Scenes/Background_super.png");
         backgroundLabel->setPixmap(bkgnd);
+        backgroundLabel->repaint();
         enemyHealth->setValue(enemy.hp);
-        std::this_thread::sleep_for(std::chrono::seconds(2));
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
-    QPixmap bkgnd2(":/new/prefix1/Scenes/Background_normal.png");
-    backgroundLabel->setPixmap(bkgnd2);
 }
 
 void enemyTurn(QLabel* backgroundLabel, bool playerTurn,QWidget* game, QPushButton* btnKick, QPushButton* btnPunch, QPushButton* btnSpecial)
@@ -153,12 +156,11 @@ void enemyTurn(QLabel* backgroundLabel, bool playerTurn,QWidget* game, QPushButt
             damage = enemy.punch();
             healthPlayer = healthPlayer - damage;
             player.hp = healthPlayer;
-            bkgnd = QPixmap(":/images/punch_animation.png");
+            bkgnd = QPixmap(":/new/prefix1/Scenes/Background_e_punch.png");
             backgroundLabel->setPixmap(bkgnd);
+            backgroundLabel->repaint();
             playerHealth->setValue(player.hp);
-            std::this_thread::sleep_for(std::chrono::seconds(2));
-            bkgnd2 = QPixmap(":/new/prefix1/Scenes/Background_normal.png");
-            backgroundLabel->setPixmap(bkgnd2);
+            std::this_thread::sleep_for(std::chrono::seconds(1));
             break;
         case 1:
             damage = enemy.kick();
@@ -168,18 +170,17 @@ void enemyTurn(QLabel* backgroundLabel, bool playerTurn,QWidget* game, QPushButt
             {
                 bkgnd = QPixmap(":/new/prefix1/Scenes/Background_e_kick_block.png");
                 backgroundLabel->setPixmap(bkgnd);
-                std::this_thread::sleep_for(std::chrono::seconds(2));
-                bkgnd2 = QPixmap(":/new/prefix1/Scenes/Background_normal.png");
-                backgroundLabel->setPixmap(bkgnd2);
+                backgroundLabel->repaint();
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+
             }
             else
             {
                 bkgnd = QPixmap(":/new/prefix1/Scenes/Background_e_kick.png");
                 backgroundLabel->setPixmap(bkgnd);
+                backgroundLabel->repaint();
                 playerHealth->setValue(player.hp);
-                std::this_thread::sleep_for(std::chrono::seconds(2));
-                bkgnd2 = QPixmap(":/new/prefix1/Scenes/Background_normal.png");
-                backgroundLabel->setPixmap(bkgnd2);
+                std::this_thread::sleep_for(std::chrono::seconds(1));
             }
             break;
         case 2:
@@ -188,20 +189,19 @@ void enemyTurn(QLabel* backgroundLabel, bool playerTurn,QWidget* game, QPushButt
             player.hp = healthPlayer;
             if (damage <= 0)
             {
-                bkgnd = QPixmap(":/new/prefix1/Scenes/Background_e_super.png");
+                bkgnd = QPixmap(":/new/prefix1/Scenes/Background_e_super_block.png");
                 backgroundLabel->setPixmap(bkgnd);
-                std::this_thread::sleep_for(std::chrono::seconds(2));
-                bkgnd2 = QPixmap(":/new/prefix1/Scenes/Background_normal.png");
-                backgroundLabel->setPixmap(bkgnd2);
+                backgroundLabel->repaint();
+                std::this_thread::sleep_for(std::chrono::seconds(1));
             }
             else
             {
                 bkgnd = QPixmap(":/new/prefix1/Scenes/Background_e_super.png");
                 backgroundLabel->setPixmap(bkgnd);
+                backgroundLabel->repaint();
                 playerHealth->setValue(player.hp);
-                std::this_thread::sleep_for(std::chrono::seconds(2));
-                bkgnd2 = QPixmap(":/new/prefix1/Scenes/Background_normal.png");
-                backgroundLabel->setPixmap(bkgnd2);
+
+                std::this_thread::sleep_for(std::chrono::seconds(1));
             }
             break;
         default:
@@ -210,7 +210,7 @@ void enemyTurn(QLabel* backgroundLabel, bool playerTurn,QWidget* game, QPushButt
         if (moveType)
         {
             if (healthPlayer <= 0) {
-                isLose(game, backgroundLabel, btnKick, btnPunch, btnSpecial);
+                isLose(game, backgroundLabel, btnKick, btnPunch, btnSpecial, playerHealth);
                 playerTurn = false;
             }
         }
@@ -261,17 +261,7 @@ void gameLoop(QWidget* game, QWidget* centralWidget,QMainWindow* mainWindow, QIc
     mainWindow->setMaximumHeight(mainWindow->height());
     mainWindow->setMaximumWidth(mainWindow->width());
 
-    enum class GameState { PlayerTurn, EnemyTurn, GameOver };
-    GameState currentState = GameState::PlayerTurn;
-    QTimer gameLoopTimer;
-    gameLoopTimer.setInterval(1000 / 60); // Set the interval to 60 times per second (approx. 16ms per frame)
     // Game loop
-    QTimer animationTimer;
-    animationTimer.setSingleShot(true);
-    QObject::connect(&animationTimer, &QTimer::timeout, [&backgroundLabel]() {
-        // Set the background to the default image after the animation duration has elapsed
-        backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_normal.png"));
-        });
     bool playerTurn = true;
     QPushButton* btnPunch = game->findChild<QPushButton*>("btnPunch");
     QPushButton* btnKick = game->findChild<QPushButton*>("btnKick");
@@ -290,10 +280,13 @@ void gameLoop(QWidget* game, QWidget* centralWidget,QMainWindow* mainWindow, QIc
         playerTurn = false;
         // Check if the game is over
         if (healthEnemy <= 0) {
-            isWin(game, backgroundLabel, btnKick, btnPunch, btnSpecial);
+            isWin(game, backgroundLabel, btnKick, btnPunch, btnSpecial,enemyHealth);
             playerTurn = false;
         }
-        enemyTurn(backgroundLabel, playerTurn, game, btnKick, btnPunch, btnSpecial);
+        else
+        {
+            enemyTurn(backgroundLabel, playerTurn, game, btnKick, btnPunch, btnSpecial);
+        }
             });
 
         QObject::connect(btnKick, &QPushButton::clicked, [&player, &enemy, backgroundLabel, enemyHealth, &playerTurn, game,btnPunch, btnKick, btnSpecial]() {
@@ -301,20 +294,27 @@ void gameLoop(QWidget* game, QWidget* centralWidget,QMainWindow* mainWindow, QIc
         playerTurn = false;
         // Check if the game is over
         if (healthEnemy <= 0) {
-            isWin(game, backgroundLabel, btnKick, btnPunch, btnSpecial);
+            isWin(game, backgroundLabel, btnKick, btnPunch, btnSpecial, enemyHealth);
             playerTurn = false;
         }
-        enemyTurn(backgroundLabel, playerTurn, game, btnKick, btnPunch, btnSpecial);
+        else
+        {
+            enemyTurn(backgroundLabel, playerTurn, game, btnKick, btnPunch, btnSpecial);
+        }
             });
 
         QObject::connect(btnSpecial, &QPushButton::clicked, [&player, &enemy, backgroundLabel, enemyHealth, &playerTurn, game ,btnPunch, btnKick, btnSpecial]() {
             specialClick(enemyHealth, backgroundLabel);
             playerTurn = false;
             // Check if the game is over
-            if (healthEnemy <= 0) {
-            isWin(game, backgroundLabel, btnKick, btnPunch, btnSpecial);
+            if (healthEnemy <= 0) 
+            {
+            isWin(game, backgroundLabel, btnKick, btnPunch, btnSpecial, enemyHealth);
             playerTurn = false;
-            enemyTurn(backgroundLabel, playerTurn, game, btnKick, btnPunch, btnSpecial);
+            }
+            else
+            {
+                enemyTurn(backgroundLabel, playerTurn, game, btnKick, btnPunch, btnSpecial);
             }
             });
 
@@ -324,9 +324,6 @@ void gameLoop(QWidget* game, QWidget* centralWidget,QMainWindow* mainWindow, QIc
         playerTurn = true;
     
 }
-
-
-
 
 
 //Main Function
