@@ -39,13 +39,21 @@ void stopFullBattleSound()
     }
 }
 
-void isWin(QWidget* game, QLabel* backgroundLabel)
+void isWin(QWidget* game, QLabel* backgroundLabel,QPushButton* btnKick, QPushButton* btnPunch, QPushButton* btnSpecial)
 {
-    QPixmap bkgnd("victoryroyale.png");
+    QPixmap bkgnd(":/new/prefix1/victoryroyale.png");
+    backgroundLabel->setPixmap(bkgnd);
+    btnKick->setEnabled(false);
+    btnPunch->setEnabled(false);
+    btnSpecial->setEnabled(false);
 }
-void isLose(QWidget* game, QLabel* backgroundLabel)
+void isLose(QWidget* game, QLabel* backgroundLabel, QPushButton* btnKick, QPushButton* btnPunch, QPushButton* btnSpecial)
 {
-    QPixmap bkgnd("gameover.png");
+    QPixmap bkgnd(":/new/prefix1/gameover.png");
+    backgroundLabel->setPixmap(bkgnd);
+    btnKick->setEnabled(false);
+    btnPunch->setEnabled(false);
+    btnSpecial->setEnabled(false);
 }
 
 void punchClick(QProgressBar* enemyHealth, QLabel* backgroundLabel)
@@ -77,10 +85,10 @@ void kickClick(QProgressBar* enemyHealth, QLabel* backgroundLabel)
     healthEnemy = healthEnemy - damage;
     enemy.hp = healthEnemy;
 
-    if (damage == 0)
+    if (damage <= 0)
     {
-        QPixmap bkgnd(":/new/prefix1/Scenes/Background_kick_block.png");
-        backgroundLabel->setPixmap(bkgnd);
+        QPixmap bkgnd3(":/new/prefix1/Scenes/Background_kick_block.png");
+        backgroundLabel->setPixmap(bkgnd3);
         enemyHealth->setValue(enemy.hp);
         std::this_thread::sleep_for(std::chrono::seconds(2));
     }
@@ -105,15 +113,18 @@ void specialClick(QProgressBar* enemyHealth, QLabel* backgroundLabel)
     healthEnemy = healthEnemy - damage;
     enemy.hp = healthEnemy;
 
-    if (damage == 0)
+    if (damage <= 0)
     {
         QPixmap bkgnd(":/new/prefix1/Scenes/Background_super_block.png");
         backgroundLabel->setPixmap(bkgnd);
+        enemyHealth->setValue(enemy.hp);
         std::this_thread::sleep_for(std::chrono::seconds(2));
     }
     else
     {
         QPixmap bkgnd(":/new/prefix1/Scenes/Background_super.png");
+        backgroundLabel->setPixmap(bkgnd);
+        enemyHealth->setValue(enemy.hp);
         std::this_thread::sleep_for(std::chrono::seconds(2));
     }
     QPixmap bkgnd2(":/new/prefix1/Scenes/Background_normal.png");
@@ -189,32 +200,41 @@ void gameLoop(QWidget* game, QWidget* centralWidget,QMainWindow* mainWindow, QIc
 
     // Handle events (e.g., button clicks, key presses)
     if (playerTurn) {
-        QObject::connect(btnPunch, &QPushButton::clicked, [&player, &enemy, backgroundLabel, enemyHealth, &playerTurn]() {
-
+        QObject::connect(btnPunch, &QPushButton::clicked, [&player, &enemy, backgroundLabel, enemyHealth, &playerTurn, game, btnPunch, btnKick, btnSpecial](){
             punchClick(enemyHealth, backgroundLabel);
         playerTurn = false;
+        // Check if the game is over
+        if (healthEnemy <= 0) {
+            isWin(game, backgroundLabel, btnKick, btnPunch, btnSpecial);
+            playerTurn = false;
+        }
             });
 
-        QObject::connect(btnKick, &QPushButton::clicked, [&player, &enemy, backgroundLabel, enemyHealth, &playerTurn]() {
+        QObject::connect(btnKick, &QPushButton::clicked, [&player, &enemy, backgroundLabel, enemyHealth, &playerTurn, game,btnPunch, btnKick, btnSpecial]() {
             kickClick(enemyHealth, backgroundLabel);
         playerTurn = false;
-
-            });
-
-        QObject::connect(btnSpecial, &QPushButton::clicked, [&player, &enemy, backgroundLabel, enemyHealth, &playerTurn]() {
-            specialClick(enemyHealth, backgroundLabel);
-        playerTurn = false;
-            });
-
         // Check if the game is over
-        if (player.isDead()) {
-            isLose(game, backgroundLabel);
+        if (healthEnemy <= 0) {
+            isWin(game, backgroundLabel, btnKick, btnPunch, btnSpecial);
             playerTurn = false;
         }
 
+            });
+
+        QObject::connect(btnSpecial, &QPushButton::clicked, [&player, &enemy, backgroundLabel, enemyHealth, &playerTurn, game,btnPunch, btnKick, btnSpecial]() {
+            specialClick(enemyHealth, backgroundLabel);
+            playerTurn = false;
+            // Check if the game is over
+            if (healthEnemy <= 0) {
+            isWin(game, backgroundLabel, btnKick, btnPunch, btnSpecial);
+            playerTurn = false;
+        }
+            });
+
+
 
     }
-    else {
+    else if (!playerTurn){
         // Enemy's turn
         // Disable the buttons for the player's moves
 
@@ -262,10 +282,6 @@ void gameLoop(QWidget* game, QWidget* centralWidget,QMainWindow* mainWindow, QIc
         }
         // do something with damage, like subtract it from player health
 
-        // Check if the game is over
-        if (enemy.isDead()) {
-            isWin(game, backgroundLabel);
-        }
         playerTurn = true;
     }
 }

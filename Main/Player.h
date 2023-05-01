@@ -16,7 +16,7 @@ public:
 	int punch() { return 20; }
 
 	int kick() {
-		if (rand() % 100 < 20) { // 20% chance of miss
+		if (rand() % 100 < 80) { // 20% chance of miss
 			return 0;
 		}
 		else {
