@@ -131,6 +131,92 @@ void specialClick(QProgressBar* enemyHealth, QLabel* backgroundLabel)
     backgroundLabel->setPixmap(bkgnd2);
 }
 
+void enemyTurn(QLabel* backgroundLabel, bool playerTurn,QWidget* game, QPushButton* btnKick, QPushButton* btnPunch, QPushButton* btnSpecial)
+{
+    Enemy enemy;
+    Player player;
+    QPixmap bkgnd;
+    QPixmap bkgnd2;
+    QProgressBar* playerHealth = game->findChild<QProgressBar*>("playerHealth");
+
+
+    if (!playerTurn) {
+        // Enemy's turn
+        // Disable the buttons for the player's moves
+
+        // Enemy makes a move
+        enemy.randmove();
+        int damage = 0; // Placeholder for the damage dealt by the enemy's move
+        int moveType = rand() % 3; // Randomly choose the type of move (0 = punch, 1 = kick, 2 = special attack)
+        switch (moveType) {
+        case 0:
+            damage = enemy.punch();
+            healthPlayer = healthPlayer - damage;
+            player.hp = healthPlayer;
+            bkgnd = QPixmap(":/images/punch_animation.png");
+            backgroundLabel->setPixmap(bkgnd);
+            playerHealth->setValue(player.hp);
+            std::this_thread::sleep_for(std::chrono::seconds(2));
+            bkgnd2 = QPixmap(":/new/prefix1/Scenes/Background_normal.png");
+            backgroundLabel->setPixmap(bkgnd2);
+            break;
+        case 1:
+            damage = enemy.kick();
+            healthPlayer = healthPlayer - damage;
+            player.hp = healthPlayer;
+            if (damage <= 0)
+            {
+                bkgnd = QPixmap(":/new/prefix1/Scenes/Background_e_kick_block.png");
+                backgroundLabel->setPixmap(bkgnd);
+                std::this_thread::sleep_for(std::chrono::seconds(2));
+                bkgnd2 = QPixmap(":/new/prefix1/Scenes/Background_normal.png");
+                backgroundLabel->setPixmap(bkgnd2);
+            }
+            else
+            {
+                bkgnd = QPixmap(":/new/prefix1/Scenes/Background_e_kick.png");
+                backgroundLabel->setPixmap(bkgnd);
+                playerHealth->setValue(player.hp);
+                std::this_thread::sleep_for(std::chrono::seconds(2));
+                bkgnd2 = QPixmap(":/new/prefix1/Scenes/Background_normal.png");
+                backgroundLabel->setPixmap(bkgnd2);
+            }
+            break;
+        case 2:
+            damage = enemy.special_attack();
+            healthPlayer = healthPlayer - damage;
+            player.hp = healthPlayer;
+            if (damage <= 0)
+            {
+                bkgnd = QPixmap(":/new/prefix1/Scenes/Background_e_super.png");
+                backgroundLabel->setPixmap(bkgnd);
+                std::this_thread::sleep_for(std::chrono::seconds(2));
+                bkgnd2 = QPixmap(":/new/prefix1/Scenes/Background_normal.png");
+                backgroundLabel->setPixmap(bkgnd2);
+            }
+            else
+            {
+                bkgnd = QPixmap(":/new/prefix1/Scenes/Background_e_super.png");
+                backgroundLabel->setPixmap(bkgnd);
+                playerHealth->setValue(player.hp);
+                std::this_thread::sleep_for(std::chrono::seconds(2));
+                bkgnd2 = QPixmap(":/new/prefix1/Scenes/Background_normal.png");
+                backgroundLabel->setPixmap(bkgnd2);
+            }
+            break;
+        default:
+            break;
+        }
+        if (moveType)
+        {
+            if (healthPlayer <= 0) {
+                isLose(game, backgroundLabel, btnKick, btnPunch, btnSpecial);
+                playerTurn = false;
+            }
+        }
+    }
+}
+
 void gameLoop(QWidget* game, QWidget* centralWidget,QMainWindow* mainWindow, QIcon icon)
 {
     // Initialize game objects
@@ -190,7 +276,6 @@ void gameLoop(QWidget* game, QWidget* centralWidget,QMainWindow* mainWindow, QIc
     QPushButton* btnPunch = game->findChild<QPushButton*>("btnPunch");
     QPushButton* btnKick = game->findChild<QPushButton*>("btnKick");
     QPushButton* btnSpecial = game->findChild<QPushButton*>("btnSpecial");
-    QProgressBar* playerHealth = game->findChild<QProgressBar*>("playerHealth");
     QProgressBar* enemyHealth = game->findChild<QProgressBar*>("enemyHealth");
     Enemy enemy;
     Character lose;
@@ -208,6 +293,7 @@ void gameLoop(QWidget* game, QWidget* centralWidget,QMainWindow* mainWindow, QIc
             isWin(game, backgroundLabel, btnKick, btnPunch, btnSpecial);
             playerTurn = false;
         }
+        enemyTurn(backgroundLabel, playerTurn, game, btnKick, btnPunch, btnSpecial);
             });
 
         QObject::connect(btnKick, &QPushButton::clicked, [&player, &enemy, backgroundLabel, enemyHealth, &playerTurn, game,btnPunch, btnKick, btnSpecial]() {
@@ -218,73 +304,28 @@ void gameLoop(QWidget* game, QWidget* centralWidget,QMainWindow* mainWindow, QIc
             isWin(game, backgroundLabel, btnKick, btnPunch, btnSpecial);
             playerTurn = false;
         }
-
+        enemyTurn(backgroundLabel, playerTurn, game, btnKick, btnPunch, btnSpecial);
             });
 
-        QObject::connect(btnSpecial, &QPushButton::clicked, [&player, &enemy, backgroundLabel, enemyHealth, &playerTurn, game,btnPunch, btnKick, btnSpecial]() {
+        QObject::connect(btnSpecial, &QPushButton::clicked, [&player, &enemy, backgroundLabel, enemyHealth, &playerTurn, game ,btnPunch, btnKick, btnSpecial]() {
             specialClick(enemyHealth, backgroundLabel);
             playerTurn = false;
             // Check if the game is over
             if (healthEnemy <= 0) {
             isWin(game, backgroundLabel, btnKick, btnPunch, btnSpecial);
             playerTurn = false;
-        }
+            enemyTurn(backgroundLabel, playerTurn, game, btnKick, btnPunch, btnSpecial);
+            }
             });
 
 
 
     }
-    else if (!playerTurn){
-        // Enemy's turn
-        // Disable the buttons for the player's moves
-
-        // Enemy makes a move
-        enemy.randmove();
-        int damage = 0; // Placeholder for the damage dealt by the enemy's move
-        int moveType = rand() % 3; // Randomly choose the type of move (0 = punch, 1 = kick, 2 = special attack)
-        switch (moveType) {
-        case 0:
-            damage = enemy.punch();
-            player.hp = player.hp - damage;
-            backgroundLabel->setPixmap(QPixmap(":/images/punch_animation.png"));
-            animationTimer.start(3000);
-            break;
-        case 1:
-            damage = enemy.kick();
-            player.hp = player.hp - damage;
-            if (damage == 0)
-            {
-                backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_e_kick_block.png"));
-                animationTimer.start(3000);
-            }
-            else
-            {
-                backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_e_kick.png"));
-                animationTimer.start(3000);
-            }
-            break;
-        case 2:
-            damage = enemy.special_attack();
-            player.hp = player.hp - damage;
-            if (damage == 0)
-            {
-                backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_e_super.png"));
-                animationTimer.start(3000);
-            }
-            else
-            {
-                backgroundLabel->setPixmap(QPixmap(":/new/prefix1/Scenes/Background_e_super.png"));
-                animationTimer.start(3000);
-            }
-            break;
-        default:
-            break;
-        }
-        // do something with damage, like subtract it from player health
-
         playerTurn = true;
-    }
+    
 }
+
+
 
 
 
